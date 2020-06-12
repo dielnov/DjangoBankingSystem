@@ -1,0 +1,383 @@
+:root {
+  font-size: 16px;
+  font-family: monospace;
+  --text-primary: #b6b6b6;
+  --text-secondary: #ececec;
+  --bg-primary: #23232e;
+  --bg-secondary: #3d5afe;
+  --transition-speed: 600ms;
+}
+
+body {
+  color: black;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+body::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track {
+  color: #1e1e24;
+}
+
+body::-webkit-scrollbar-thumb {
+  color: #6649b8;
+}
+
+main {
+  margin-left: 5rem;
+  padding: 0;
+  /* background-image: url("/static/bank/images/theAteam.png"); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.pavbar {
+  position: fixed;
+  background-color: var(--bg-primary);
+  background-image: url("/static/bank/images/login_bg.png");
+  transition: width 200ms ease;
+}
+
+.mylogo {
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--text-secondary);
+  letter-spacing: 0.3ch;
+  width: 100%;
+}
+
+.mylogo i {
+  transform: rotate(0deg);
+  color: dodgerblue;
+  margin-left: 2rem;
+  transition: transform var(--transition-speed);
+}
+
+.pavbar:hover .mylogo i {
+  transform: rotate(1080deg);
+  padding-left: 1rem;
+  margin-left: 0;
+}
+
+.pavbar-pav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.pav-item {
+  width: 100%;
+}
+
+.pav-link {
+  display: flex;
+  align-items: center;
+  height: 3.2rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  filter: grayscale(100%) opacity(0.9);
+  transition: var(--transition-speed);
+}
+
+.pav-link:hover {
+  filter: grayscale(0) brightness(100%) opacity(0.6);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.pav-link-mylogo {
+  display: flex;
+  align-items: center;
+  height: 3.2rem;
+  text-decoration: none;
+}
+
+.pav-link i {
+  min-width: 2rem;
+  margin: 0 1.5rem;
+}
+
+.link-text {
+  display: none;
+  margin-left: 1rem;
+}
+
+.mylogo-text {
+  display: none;
+  margin-left: 1rem;
+}
+
+.fa-primary {
+  color: #ff7eee;
+}
+
+.fa-secondary {
+  color: #df49a6;
+}
+
+.fa-primary,
+.fa-secondary {
+  transition: var(--transition-speed);
+}
+
+@media only screen and (max-width: 600px) {
+  .pavbar {
+    bottom: 0;
+    width: 100vw;
+    height: 2rem;
+    z-index: 1;
+  }
+
+  .mylogo {
+    display: none;
+  }
+
+  .pavbar-pav {
+    flex-direction: row;
+  }
+
+  .pav-link {
+    justify-content: center;
+  }
+
+  main {
+    margin: 0;
+    margin-bottom: 1.8rem;
+    background-image: url("/static/bank/images/bankwith.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    z-index: 99999999999999999999999999999999999999999999999999999999999999999999999;
+  }
+
+  .head {
+    display: none;
+  }
+
+  .c-body {
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 1rem;
+  }
+
+  #three {
+    display: none;
+  }
+
+  #four {
+    display: none;
+  }
+
+  #two {
+    display: none;
+  }
+
+  .formclass {
+    padding: 1rem 0.5rem 0.5rem 0.5rem;
+    margin: 1rem;
+    background-image: url("/static/bank/images/theAteam.png");
+    background-attachment: fixed;
+    border: 2px double #9c948c;
+  }
+
+  .myCardHead {
+    color: rgb(255, 255, 255);
+  }
+
+  .mybg {
+    background-color: #9b59b6 !important;
+    justify-content: center;
+    border-bottom: 2px double #2a0e35;
+  }
+
+  .TagHead{
+    text-align: center;
+    font-weight: bolder;
+    text-decoration: underline;
+    font-family: "Righteous', cursive";;
+    padding: 1.5rem;
+  }
+
+  #loanTitles{
+    display: none;
+  }
+}
+
+.tagz{
+  font-family: Ubuntu;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+@media only screen and (min-width: 600px) {
+  .titlesSM{
+    display: none;
+  }
+  
+  .TagHead{
+    text-align: center;
+    font-weight: bolder;
+    text-decoration: underline;
+    font-family: "Righteous', cursive";;
+  }
+
+  .pavbar {
+    width: 5rem;
+    height: 100vh;
+  }
+
+  .pavbar:hover {
+    width: 15rem;
+    z-index: 999999999999999999999999999999999;
+  }
+
+  .pavbar:hover .link-text {
+    display: inline;
+    transition: opacity var(--transition-speed);
+  }
+
+  .pavbar:hover .mylogo-text {
+    display: inline;
+    transition: opacity var(--transition-speed);
+  }
+
+  .pav-item:last-child {
+    margin-top: auto;
+  }
+
+  .head {
+    margin-left: 5rem;
+    z-index: 1;
+    background-image: url("/static/bank/images/banner.jpg");
+  }
+
+  .form-text-ds {
+    /* display: none; */
+  }
+
+  .c-body {
+    background-image: url("/static/bank/images/bank2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 88vh;
+  }
+
+  p {
+    width: fit-content;
+  }
+
+  .formclass {
+    padding: 2rem;
+    margin: 0 2rem 2rem 2rem;
+    background-image: url("/static/bank/images/atlasmara.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .myCardHead {
+    color: rgb(255, 255, 255);
+    background: transparent !important;
+  }
+
+  main {
+    background-image: url("/static/bank/images/bankwith.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+  }
+}
+
+@font-face {
+  font-family: "Pacifico";
+  src: url("/static/bank/fonts/Pacifico-Regular.ttf");
+}
+
+.pacifico {
+  font-family: "Pacifico";
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  src: url("/static/bank/fonts/UbuntuMono-Regular.ttf");
+}
+
+.ubuntu {
+  font-family: "Ubuntu";
+}
+
+@font-face {
+  font-family: "Sriracha";
+  src: url("/static/bank/fonts/Sriracha-Regular.ttf");
+}
+
+.Sriracha {
+  font-family: "Sriracha";
+}
+
+@font-face {
+  font-family: "Lateef";
+  src: url("/static/bank/fonts/Lateef-Regular.ttf");
+}
+
+.Lateef {
+  font-family: "Lateef";
+}
+
+
+
+@font-face {
+  font-family: "Righteous', cursive";
+  src: url("/static/bank/fonts/Righteous-Regular.ttf");
+}
+
+.Righteous {
+  font-family: "Righteous', cursive";
+  font-size: 1.25rem;
+}
+
+.asth {
+  color: dodgerblue;
+}
+
+.asth:hover {
+  color: green;
+}
+.dev {
+  color: green;
+}
+
+.asth:hover + .dev {
+  color: dodgerblue;
+}
+
+.form-text {
+  font-weight: bold;
+  margin-bottom: 0;
+  color: black;
+  font-family: "Lateef";
+  font-size: 1rem;
+}
+
+.form-text-ds {
+  font-weight: bold;
+  margin-bottom: 0;
+  color: black;
+  font-family: "Lateef";
+  font-size: 1rem;
+}
+
+.fomi {
+  font-family: "Ubuntu";
+  font-size: 0.95rem;
+}

@@ -1,0 +1,161 @@
+{% extends "bank/base.html" %} {% load crispy_forms_tags %} {% load static %}
+
+<!-- Main Account Block -->
+{% block main %}
+<div style="opacity: 0.85;" class="card p-2">
+  <h3 class="card-header text-center">
+    Loan Details
+    <br />
+    <span class="ubuntu">
+      PreLoan Balance: {{ details.currency }} {{ details.balance }}
+    </span>
+  </h3>
+  <form class="card-body" method="POST">
+    {% csrf_token %}
+    <div class="form-row">
+      <div class="col-md-4">
+
+        <div id="div_id_account" class="form-group">
+          <label for="id_account" class="requiredField">
+            <strong class="Righteous">User Account:</strong>
+          </label>
+          <div class="">
+            <select name="account" class="select form-control" required id="id_account">
+
+              <option value="{{ request.user.id }}">{{ request.user }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="div_id_accnum" class="form-group">
+          <label for="id_accnum" class="requiredField">
+            <strong class="Righteous">Account Number:</strong>
+          </label>
+          <div class="">
+            <input readonly type="text" name="accnum" {% if details.accnum %} value="{{ details.accnum }}" {% endif %}
+              {% if acc %} value="{{ acc }}" {% endif %} maxlength="30" class="textinput textInput form-control"
+              required id="id_accnum" />
+          </div>
+        </div>
+
+        <div id="div_id_cardnum" class="form-group">
+          <label for="id_cardnum" class="requiredField">
+            <strong class="Righteous">Card Number:</strong>
+          </label>
+          <div class="">
+            <input readonly type="text" name="cardnum" {% if details.accnum %} value="{{ details.accnum }}" {% endif %}
+              {% if acc %} value="{{ acc }}" {% endif %} maxlength="30" class="textinput textInput form-control"
+              required id="id_cardnum" />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+
+        <div id="div_id_acctype" class="form-group">
+          <label for="id_acctype" class="requiredField">
+            <strong class="Righteous">Loan Type:</strong>
+          </label>
+          <div class="">
+            <select name="acctype" class="select form-control" required id="id_acctype">
+
+              <option value="Motor Vehicle Loan" {% if details.acctype == "Motor Vehicle Loan" %} selected=="selected"
+                {% endif %}>Motor Vehicle Loan</option>
+              <option value="Housing Loan" {% if details.acctype == "Housing Loan" %} selected="selected"
+                {% endif %}>Housing Loan</option>
+              <option value="Personal Loan" {% if details.acctype == "Personal Loan" %} selected="selected" {% endif %}>
+                Personal Loan</option>
+              <option value="Civil Servant Loan" {% if details.acctype == "Civil Servant Loan" %}
+                selected="selected" {% endif %}>Civil Servant Loan</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="div_id_currency" class="form-group">
+          <label for="id_currency" class="requiredField">
+            <strong class="Righteous">Currency:</strong>
+          </label>
+          <div class="">
+            <select name="currency" class="select form-control" required id="id_currency">
+
+              <option value="USD $" {% if details.currency == "USD $" %} selected="selected" {% endif %}>USD $</option>
+              <option value="ZWL $" {% if details.currency == "ZWL $" %} selected="selected" {% endif %}>ZWL $</option>
+              <option value="EUR €" {% if details.currency == "EUR €" %} selected="selected" {% endif %}>EUR €</option>
+              <option value="CNY ¥" {% if details.currency == "CNY ¥" %} selected="selected" {% endif %}>CNY ¥</option>
+              <option value="GBP £" {% if details.currency == "GBP £" %} selected="selected" {% endif %}>GBP £</option>
+              <option value="INR ₹" {% if details.currency == "INR ₹" %} selected="selected" {% endif %}>INR ₹</option>
+              <option value="RUB р" {% if details.currency == "RUB р" %} selected="selected" {% endif %}>RUB р</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="div_id_branch" class="form-group">
+          <label for="id_branch" class="requiredField">
+            <strong class="Righteous">Branch:</strong>
+          </label>
+          <div class="">
+            <select name="branch" class="select form-control" required id="id_branch">
+
+              <option value="Angwa" {% if details.branch == "Angwa" %} selected="selected" {% endif %}>Angwa</option>
+              <option value="Masasa" {% if details.branch == "Masasa" %} selected="selected" {% endif %}>Masasa</option>
+              <option value="Eastlea" {% if details.branch == "Eastlea" %} selected="selected" {% endif %}>Eastlea
+              </option>
+              <option value="Letombo" {% if details.branch == "Letombo" %} selected="selected" {% endif %}>Letombo
+              </option>
+              <option value="Westgate" {% if details.branch == "Westgate" %} selected="selected" {% endif %}>Westgate
+              </option>
+              <option value="Westgate" {% if details.branch == "Westgate" %} selected="selected" {% endif %}>Eastagte
+              </option>
+              <option value="Mt Westgate" {% if details.branch == "Mt Westgate" %} selected="selected" {% endif %}>Mt
+                Hampden</option>
+              <option value="Mt Pleasant" {% if details.branch == "Mt Pleasant" %} selected="selected" {% endif %}>Mt
+                Pleasant</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+
+        <div id="div_id_cIF" class="form-group">
+          <label for="id_cIF" class="requiredField">
+            <strong class="Righteous">CIF:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="cIF" {% if details.cIF %} value="{{ details.cIF }}" {% else %} value="{{cif}}" {% endif %} maxlength="30"
+              class="textinput textInput form-control" required id="id_cIF" />
+          </div>
+        </div>
+
+        <div id="div_id_balance" class="form-group">
+          <label for="id_balance" class="requiredField">
+            <strong class="Righteous">PreLoan Balance:</strong>
+          </label>
+          <div class="">
+            <input readonly type="text" name="balance" {% if details.balance %} value="{{ details.balance }}" {% else %}
+              value="{{est_loan}}" {% endif %} maxlength="30" class="textinput textInput form-control" id="id_balance" />
+          </div>
+        </div>
+
+        <div class="text-center form-group">
+          <div id="div_id_aTM" class="form-check">
+            <input type="checkbox" name="aTM" class="checkboxinput form-check-input" id="id_aTM" {% if details.aTM %}
+              checked {% endif %} />
+            <label for="id_aTM" class="form-check-label">
+              <strong class="Righteous">ATM(status)</strong>
+            </label>
+          </div>
+        </div>
+
+        <input class="btn btn-block btn-primary btn-outline-warning" type="submit" value="Accept" />
+      </div>
+    </div>
+  </form>
+  <div class="card-footer text-center">
+    <p class="text-center">
+      Please Read And Understand Our
+      <a href="https://www.bancabc.co.zw/terms_of_use">Terms And Conditions</a>
+    </p>
+  </div>
+</div>
+{% endblock main %}

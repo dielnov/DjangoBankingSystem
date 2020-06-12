@@ -1,0 +1,1729 @@
+{% extends "bank/base.html" %} {% load crispy_forms_tags %} {% load static %}
+
+<!-- Main Account Block -->
+{% block main %}
+<div style="opacity: 0.85;" class="card p-2">
+  <h3 class="card-header text-center">
+    Loan Prequalification Application
+  </h3>
+  <form enctype="multipart/form-data" class="card-body" method="POST">
+    {% csrf_token %}
+    <div style="border-bottom: 2px solid darkgrey;" class="form-row">
+      <div class="col-md-3">
+        <h4 class="">Personal Details:</h4>
+
+        <div id="div_id_account" class="form-group">
+          <label for="id_account" class="requiredField">
+            <strong class="tagz">User Account:</strong>
+          </label>
+          <div class="">
+            <select name="account" class="select form-control" required id="id_account">
+              <option value="{{ request.user.id }}" selected="selected">{{ request.user }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="div_id_title" class="form-group">
+          <label for="id_title" class="requiredField">
+            <strong class="tagz">Title:</strong>
+          </label>
+          <div class="">
+            <select name="title" class="select form-control" required id="id_title">
+
+              <option value="Mr." {% if individual.branch == "Mr." %} selected="selected" {% endif %}>Mr.</option>
+              <option value="Ms." {% if individual.branch == "Ms." %} selected="selected" {% endif %}>Ms.</option>
+              <option value="Mrs." {% if individual.branch == "Mrs." %} selected="selected" {% endif %}>Mrs.</option>
+              <option value="Miss." {% if individual.branch == "Miss." %} selected="selected" {% endif %}>Miss.</option>
+              <option value="Dr." {% if individual.branch == "Dr." %} selected="selected" {% endif %}>Dr.</option>
+              <option value="Rev." {% if individual.branch == "Rev." %} selected="selected" {% endif %}>Rev.</option>
+              <option value="Hon." {% if individual.branch == "Hon." %} selected="selected" {% endif %}>Hon.</option>
+              <option value="Prof." {% if individual.branch == "Prof." %} selected="selected" {% endif %}>Prof.</option>
+            </select>
+
+          </div>
+        </div>
+
+        <div id="div_id_firstName" class="form-group">
+          <label for="id_firstName" class="requiredField">
+            <strong class="tagz">First Name:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="firstName" {% if individual.firstName %} value="{{ individual.firstName }}"
+              {% endif %} maxlength="60" class="textinput textInput form-control" required id="id_firstName" />
+          </div>
+        </div>
+
+        <div id="div_id_middleName" class="form-group">
+          <label for="id_middleName" class="">
+            <strong class="tagz">Middle Name:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="middleName" {% if individual.firstName %} value="{{ individual.firstName }}"
+              {% else %} value=" " {% endif %} maxlength="60" class="textinput textInput form-control" 
+              id="id_middleName" />
+          </div>
+        </div>
+
+        <div id="div_id_lastName" class="form-group">
+          <label for="id_lastName" class="requiredField">
+            <strong class="tagz">Last Name:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="lastName" {% if individual.lastName %} value="{{ individual.lastName }}"
+              {% endif %} maxlength="60" class="textinput textInput form-control" required id="id_lastName" />
+          </div>
+        </div>
+
+        <div id="div_id_maritalStatus" class="form-group">
+          <label for="id_maritalStatus" class="requiredField">
+            <strong class="tagz">Marital Status:</strong>
+          </label>
+          <div class="">
+            <select name="maritalStatus" class="select form-control" required id="id_maritalStatus">
+
+              <option value="Single" {% if individual.maritalStatus == "Single" %} selected="selected" {% endif %}>
+                Single
+              </option>
+              <option value="Engaged" {% if individual.maritalStatus == "Engaged" %} selected="selected" {% endif %}>
+                Engaged
+              </option>
+              <option value="Married" {% if individual.maritalStatus == "Married" %} selected="selected" {% endif %}>
+                Married
+              </option>
+              <option value="Divorced" {% if individual.maritalStatus == "Divorced" %} selected="selected" {% endif %}>
+                Divorced
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div id="div_id_maidenName" class="form-group">
+          <label for="id_maidenName" class="">
+            <strong class="tagz">Maiden Name:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="maidenName" {% if individual.maidenName %} value="{{ individual.maidenName }}"
+              {% else %} value=" " {% endif %} maxlength="60" class="textinput textInput form-control"  id="id_maidenName" />
+          </div>
+        </div>
+        <div class="form-group">
+          <div id="div_id_isMale" class="form-check">
+            <input type="checkbox" name="isMale" {% if individual.isMale %} checked {% endif %}
+              class="checkboxinput form-check-input" id="id_isMale" />
+            <label for="id_isMale" class="form-check-label">
+              {% if individual.isMale %}
+              <strong class="tagz">Female</strong>
+              
+              {% else %}
+              <strong class="tagz"> Male</strong>
+              {% endif %}
+
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <h4 class="">National Identification:</h4>
+        <div id="div_id_Nationality" class="form-group">
+          <label for="id_Nationality" class="requiredField">
+            <strong class="tagz">Nationality:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="Nationality" {% if individual.Nationality %} value="{{ individual.Nationality }}"
+              {% endif %} maxlength="60" class="textinput textInput form-control" required id="id_Nationality" />
+          </div>
+        </div>
+
+        <div id="div_id_nationalID" class="form-group">
+          <label for="id_nationalID" class="requiredField">
+            <strong class="tagz">National ID:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="nationalID" {% if individual.nationalID %} value="{{ individual.nationalID }}"
+              {% endif %} maxlength="60" class="textinput textInput form-control" required id="id_nationalID" />
+          </div>
+        </div>
+
+        <div id="div_id_dob" class="form-group">
+          <label for="id_dob" class="requiredField">
+            <strong class="tagz">Date Of Birth:</strong>
+          </label>
+          <div class="">
+            <input required id="id_dob" name="dob" {% if individual.dob %} value="{{ individual.dob }}" {% endif %}
+              class="textinput textInput form-control" type="text" onfocus="(this.type='date')"
+              onblur="(this.type='text')" />
+          </div>
+        </div>
+
+        <div id="div_id_passportNum" class="form-group">
+          <label for="id_passportNum" class="requiredField">
+            <strong class="tagz">Passport Number:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="passportNum" {% if individual.passportNum %} value="{{ individual.passportNum }}"
+              {% endif %} maxlength="60" class="textinput textInput form-control" required id="id_passportNum" />
+          </div>
+        </div>
+
+        <div id="div_id_passportIssuerCountry" class="form-group">
+          <label for="id_passportIssuerCountry" class="requiredField">
+            <strong class="tagz">Passport Issuer Country:</strong>
+          </label>
+          <div class="">
+            <select name="passportIssuerCountry" class="select form-control" required id="id_passportIssuerCountry">
+
+              <option {% if individual.passportIssuerCountry == "Afghanistan" %} selected="selected" {% endif %}
+                value="Afganistan">
+                Afghanistan</option>
+              <option {% if individual.passportIssuerCountry == "Albania" %} selected="selected" {% endif %}
+                value="Albania">Albania
+              </option>
+              <option {% if individual.passportIssuerCountry == "Algeria" %} selected="selected" {% endif %}
+                value="Algeria">Algeria
+              </option>
+              <option {% if individual.passportIssuerCountry == "American Samoa" %} selected="selected" {% endif %}
+                value="American Samoa">American Samoa</option>
+              <option {% if individual.passportIssuerCountry == "Andorra" %} selected="selected" {% endif %}
+                value="Andorra">Andorra
+              </option>
+              <option {% if individual.passportIssuerCountry == "Angola" %} selected="selected" {% endif %}
+                value="Angola">Angola
+              </option>
+              <option {% if individual.passportIssuerCountry == "Anguilla" %} selected="selected" {% endif %}
+                value="Anguilla">
+                Anguilla</option>
+              <option {% if individual.passportIssuerCountry == "Antigua & Barbuda" %} selected="selected" {% endif %}
+                value="Antigua & Barbuda">Antigua & Barbuda</option>
+              <option {% if individual.passportIssuerCountry == "Argentina" %} selected="selected" {% endif %}
+                value="Argentina">
+                Argentina</option>
+              <option {% if individual.passportIssuerCountry == "Armenia" %} selected="selected" {% endif %}
+                value="Armenia">Armenia
+              </option>
+              <option {% if individual.passportIssuerCountry == "Aruba" %} selected="selected" {% endif %}
+                value="Aruba">Aruba
+              </option>
+              <option {% if individual.passportIssuerCountry == "Australia" %} selected="selected" {% endif %}
+                value="Australia">
+                Australia</option>
+              <option {% if individual.passportIssuerCountry == "Austria" %} selected="selected" {% endif %}
+                value="Austria">Austria
+              </option>
+              <option {% if individual.passportIssuerCountry == "Azerbaijan" %} selected="selected" {% endif %}
+                value="Azerbaijan">
+                Azerbaijan</option>
+              <option {% if individual.passportIssuerCountry == "Bahamas" %} selected="selected" {% endif %}
+                value="Bahamas">Bahamas
+              </option>
+              <option {% if individual.passportIssuerCountry == "Bahrain" %} selected="selected" {% endif %}
+                value="Bahrain">Bahrain
+              </option>
+              <option {% if individual.passportIssuerCountry == "Bangladesh" %} selected="selected" {% endif %}
+                value="Bangladesh">
+                Bangladesh</option>
+              <option {% if individual.passportIssuerCountry == "Barbados" %} selected="selected" {% endif %}
+                value="Barbados">
+                Barbados</option>
+              <option {% if individual.passportIssuerCountry == "Belarus" %} selected="selected" {% endif %}
+                value="Belarus">Belarus
+              </option>
+              <option {% if individual.passportIssuerCountry == "Belgium" %} selected="selected" {% endif %}
+                value="Belgium">Belgium
+              </option>
+              <option {% if individual.passportIssuerCountry == "Belize" %} selected="selected" {% endif %}
+                value="Belize">Belize
+              </option>
+              <option {% if individual.passportIssuerCountry == "Benin" %} selected="selected" {% endif %}
+                value="Benin">Benin
+              </option>
+              <option {% if individual.passportIssuerCountry == "Bermuda" %} selected="selected" {% endif %}
+                value="Bermuda">Bermuda
+              </option>
+              <option {% if individual.passportIssuerCountry == "Bhutan" %} selected="selected" {% endif %}
+                value="Bhutan">Bhutan
+              </option>
+              <option {% if individual.passportIssuerCountry == "Bolivia" %} selected="selected" {% endif %}
+                value="Bolivia">Bolivia
+              </option>
+              <option {% if individual.passportIssuerCountry == "Bonaire" %} selected="selected" {% endif %}
+                value="Bonaire">Bonaire
+              </option>
+              <option {% if individual.passportIssuerCountry == "Bosnia & Herzegovina" %} selected="selected"
+                {% endif %} value="Bosnia & Herzegovina">Bosnia & Herzegovina</option>
+              <option {% if individual.passportIssuerCountry == "Botswana" %} selected="selected" {% endif %}
+                value="Botswana">
+                Botswana</option>
+              <option {% if individual.passportIssuerCountry == "Brazil" %} selected="selected" {% endif %}
+                value="Brazil">Brazil
+              </option>
+              <option {% if individual.passportIssuerCountry == "British Indian Ocean Ter" %} selected="selected"
+                {% endif %} value="British Indian Ocean Ter">British Indian Ocean Ter</option>
+              <option {% if individual.passportIssuerCountry == "Brunei" %} selected="selected" {% endif %}
+                value="Brunei">Brunei
+              </option>
+              <option {% if individual.passportIssuerCountry == "Bulgaria" %} selected="selected" {% endif %}
+                value="Bulgaria">
+                Bulgaria</option>
+              <option {% if individual.passportIssuerCountry == "Burkina Faso" %} selected="selected" {% endif %}
+                value="Burkina Faso">Burkina Faso</option>
+              <option {% if individual.passportIssuerCountry == "Burundi" %} selected="selected" {% endif %}
+                value="Burundi">Burundi
+              </option>
+              <option {% if individual.passportIssuerCountry == "Cambodia" %} selected="selected" {% endif %}
+                value="Cambodia">
+                Cambodia</option>
+              <option {% if individual.passportIssuerCountry == "Cameroon" %} selected="selected" {% endif %}
+                value="Cameroon">
+                Cameroon</option>
+              <option {% if individual.passportIssuerCountry == "Canada" %} selected="selected" {% endif %}
+                value="Canada">Canada
+              </option>
+              <option {% if individual.passportIssuerCountry == "Canary Islands" %} selected="selected" {% endif %}
+                value="Canary Islands">Canary Islands</option>
+              <option {% if individual.passportIssuerCountry == "Cape Verde" %} selected="selected" {% endif %}
+                value="Cape Verde">
+                Cape Verde</option>
+              <option {% if individual.passportIssuerCountry == "Cayman Islands" %} selected="selected" {% endif %}
+                value="Cayman Islands">Cayman Islands</option>
+              <option {% if individual.passportIssuerCountry == "Central African Republic" %} selected="selected"
+                {% endif %} value="Central African Republic">Central African Republic</option>
+              <option {% if individual.passportIssuerCountry == "Chad" %} selected="selected" {% endif %} value="Chad">
+                Chad</option>
+              <option {% if individual.passportIssuerCountry == "Channel Islands" %} selected="selected" {% endif %}
+                value="Channel Islands">Channel Islands</option>
+              <option {% if individual.passportIssuerCountry == "Chile" %} selected="selected" {% endif %}
+                value="Chile">Chile
+              </option>
+              <option {% if individual.passportIssuerCountry == "China" %} selected="selected" {% endif %}
+                value="China">China
+              </option>
+              <option {% if individual.passportIssuerCountry == "Christmas Island" %} selected="selected" {% endif %}
+                value="Christmas Island">Christmas Island</option>
+              <option {% if individual.passportIssuerCountry == "Cocos Island" %} selected="selected" {% endif %}
+                value="Cocos Island">Cocos Island</option>
+              <option {% if individual.passportIssuerCountry == "Colombia" %} selected="selected" {% endif %}
+                value="Colombia">
+                Colombia</option>
+              <option {% if individual.passportIssuerCountry == "Comoros" %} selected="selected" {% endif %}
+                value="Comoros">Comoros
+              </option>
+              <option {% if individual.passportIssuerCountry == "Congo" %} selected="selected" {% endif %}
+                value="Congo">Congo
+              </option>
+              <option {% if individual.passportIssuerCountry == "Cook Islands" %} selected="selected" {% endif %}
+                value="Cook Islands">Cook Islands</option>
+              <option {% if individual.passportIssuerCountry == "Costa Rica" %} selected="selected" {% endif %}
+                value="Costa Rica">
+                Costa Rica</option>
+              <option {% if individual.passportIssuerCountry == "Cote DIvoire" %} selected="selected" {% endif %}
+                value="Cote DIvoire">Cote DIvoire</option>
+              <option {% if individual.passportIssuerCountry == "Croatia" %} selected="selected" {% endif %}
+                value="Croatia">Croatia
+              </option>
+              <option {% if individual.passportIssuerCountry == "Cuba" %} selected="selected" {% endif %} value="Cuba">
+                Cuba</option>
+              <option {% if individual.passportIssuerCountry == "Curacao" %} selected="selected" {% endif %}
+                value="Curaco">Curacao
+              </option>
+              <option {% if individual.passportIssuerCountry == "Cyprus" %} selected="selected" {% endif %}
+                value="Cyprus">Cyprus
+              </option>
+              <option {% if individual.passportIssuerCountry == "Czech Republic" %} selected="selected" {% endif %}
+                value="Czech Republic">Czech Republic</option>
+              <option {% if individual.passportIssuerCountry == "Denmark" %} selected="selected" {% endif %}
+                value="Denmark">Denmark
+              </option>
+              <option {% if individual.passportIssuerCountry == "Djibouti" %} selected="selected" {% endif %}
+                value="Djibouti">
+                Djibouti</option>
+              <option {% if individual.passportIssuerCountry == "Dominica" %} selected="selected" {% endif %}
+                value="Dominica">
+                Dominica</option>
+              <option {% if individual.passportIssuerCountry == "Dominican Republic" %} selected="selected" {% endif %}
+                value="Dominican Republic">Dominican Republic</option>
+              <option {% if individual.passportIssuerCountry == "East Timor" %} selected="selected" {% endif %}
+                value="East Timor">
+                East Timor</option>
+              <option {% if individual.passportIssuerCountry == "Ecuador" %} selected="selected" {% endif %}
+                value="Ecuador">Ecuador
+              </option>
+              <option {% if individual.passportIssuerCountry == "Egypt" %} selected="selected" {% endif %}
+                value="Egypt">Egypt
+              </option>
+              <option {% if individual.passportIssuerCountry == "El Salvador" %} selected="selected" {% endif %}
+                value="El Salvador">
+                El Salvador</option>
+              <option {% if individual.passportIssuerCountry == "Equatorial Guinea" %} selected="selected" {% endif %}
+                value="Equatorial Guinea">Equatorial Guinea</option>
+              <option {% if individual.passportIssuerCountry == "Eritrea" %} selected="selected" {% endif %}
+                value="Eritrea">Eritrea
+              </option>
+              <option {% if individual.passportIssuerCountry == "Estonia" %} selected="selected" {% endif %}
+                value="Estonia">Estonia
+              </option>
+              <option {% if individual.passportIssuerCountry == "Ethiopia" %} selected="selected" {% endif %}
+                value="Ethiopia">
+                Ethiopia</option>
+              <option {% if individual.passportIssuerCountry == "Falkland Islands" %} selected="selected" {% endif %}
+                value="Falkland Islands">Falkland Islands</option>
+              <option {% if individual.passportIssuerCountry == "Faroe Islands" %} selected="selected" {% endif %}
+                value="Faroe Islands">Faroe Islands</option>
+              <option {% if individual.passportIssuerCountry == "Fiji" %} selected="selected" {% endif %} value="Fiji">
+                Fiji</option>
+              <option {% if individual.passportIssuerCountry == "Finland" %} selected="selected" {% endif %}
+                value="Finland">Finland
+              </option>
+              <option {% if individual.passportIssuerCountry == "France" %} selected="selected" {% endif %}
+                value="France">France
+              </option>
+              <option {% if individual.passportIssuerCountry == "French Guiana" %} selected="selected" {% endif %}
+                value="French Guiana">French Guiana</option>
+              <option {% if individual.passportIssuerCountry == "French Polynesia" %} selected="selected" {% endif %}
+                value="French Polynesia">French Polynesia</option>
+              <option {% if individual.passportIssuerCountry == "French Southern Ter" %} selected="selected" {% endif %}
+                value="French Southern Ter">French Southern Ter</option>
+              <option {% if individual.passportIssuerCountry == "Gabon" %} selected="selected" {% endif %}
+                value="Gabon">Gabon
+              </option>
+              <option {% if individual.passportIssuerCountry == "Gambia" %} selected="selected" {% endif %}
+                value="Gambia">Gambia
+              </option>
+              <option {% if individual.passportIssuerCountry == "Georgia" %} selected="selected" {% endif %}
+                value="Georgia">Georgia
+              </option>
+              <option {% if individual.passportIssuerCountry == "Germany" %} selected="selected" {% endif %}
+                value="Germany">Germany
+              </option>
+              <option {% if individual.passportIssuerCountry == "Ghana" %} selected="selected" {% endif %}
+                value="Ghana">Ghana
+              </option>
+              <option {% if individual.passportIssuerCountry == "Gibraltar" %} selected="selected" {% endif %}
+                value="Gibraltar">
+                Gibraltar</option>
+              <option {% if individual.passportIssuerCountry == "Great Britain" %} selected="selected" {% endif %}
+                value="Great Britain">Great Britain</option>
+              <option {% if individual.passportIssuerCountry == "Greece" %} selected="selected" {% endif %}
+                value="Greece">Greece
+              </option>
+              <option {% if individual.passportIssuerCountry == "Greenland" %} selected="selected" {% endif %}
+                value="Greenland">
+                Greenland</option>
+              <option {% if individual.passportIssuerCountry == "Grenada" %} selected="selected" {% endif %}
+                value="Grenada">Grenada
+              </option>
+              <option {% if individual.passportIssuerCountry == "Guadeloupe" %} selected="selected" {% endif %}
+                value="Guadeloupe">
+                Guadeloupe</option>
+              <option {% if individual.passportIssuerCountry == "Guam" %} selected="selected" {% endif %} value="Guam">
+                Guam</option>
+              <option {% if individual.passportIssuerCountry == "Guatemala" %} selected="selected" {% endif %}
+                value="Guatemala">
+                Guatemala</option>
+              <option {% if individual.passportIssuerCountry == "Guinea" %} selected="selected" {% endif %}
+                value="Guinea">Guinea
+              </option>
+              <option {% if individual.passportIssuerCountry == "Guyana" %} selected="selected" {% endif %}
+                value="Guyana">Guyana
+              </option>
+              <option {% if individual.passportIssuerCountry == "Haiti" %} selected="selected" {% endif %}
+                value="Haiti">Haiti
+              </option>
+              <option {% if individual.passportIssuerCountry == "Hawaii" %} selected="selected" {% endif %}
+                value="Hawaii">Hawaii
+              </option>
+              <option {% if individual.passportIssuerCountry == "Honduras" %} selected="selected" {% endif %}
+                value="Honduras">
+                Honduras</option>
+              <option {% if individual.passportIssuerCountry == "Hong Kong" %} selected="selected" {% endif %}
+                value="Hong Kong">Hong
+                Kong</option>
+              <option {% if individual.passportIssuerCountry == "Hungary" %} selected="selected" {% endif %}
+                value="Hungary">Hungary
+              </option>
+              <option {% if individual.passportIssuerCountry == "Iceland" %} selected="selected" {% endif %}
+                value="Iceland">Iceland
+              </option>
+              <option {% if individual.passportIssuerCountry == "Indonesia" %} selected="selected" {% endif %}
+                value="Indonesia">
+                Indonesia</option>
+              <option {% if individual.passportIssuerCountry == "India" %} selected="selected" {% endif %}
+                value="India">India
+              </option>
+              <option {% if individual.passportIssuerCountry == "Iran" %} selected="selected" {% endif %} value="Iran">
+                Iran</option>
+              <option {% if individual.passportIssuerCountry == "Iraq" %} selected="selected" {% endif %} value="Iraq">
+                Iraq</option>
+              <option {% if individual.passportIssuerCountry == "Ireland" %} selected="selected" {% endif %}
+                value="Ireland">Ireland
+              </option>
+              <option {% if individual.passportIssuerCountry == "Isle of Man" %} selected="selected" {% endif %}
+                value="Isle of Man">
+                Isle of Man</option>
+              <option {% if individual.passportIssuerCountry == "Israel" %} selected="selected" {% endif %}
+                value="Israel">Israel
+              </option>
+              <option {% if individual.passportIssuerCountry == "Italy" %} selected="selected" {% endif %}
+                value="Italy">Italy
+              </option>
+              <option {% if individual.passportIssuerCountry == "Jamaica" %} selected="selected" {% endif %}
+                value="Jamaica">Jamaica
+              </option>
+              <option {% if individual.passportIssuerCountry == "Japan" %} selected="selected" {% endif %}
+                value="Japan">Japan
+              </option>
+              <option {% if individual.passportIssuerCountry == "Jordan" %} selected="selected" {% endif %}
+                value="Jordan">Jordan
+              </option>
+              <option {% if individual.passportIssuerCountry == "Kazakhstan" %} selected="selected" {% endif %}
+                value="Kazakhstan">
+                Kazakhstan</option>
+              <option {% if individual.passportIssuerCountry == "Kenya" %} selected="selected" {% endif %}
+                value="Kenya">Kenya
+              </option>
+              <option {% if individual.passportIssuerCountry == "Kiribati" %} selected="selected" {% endif %}
+                value="Kiribati">
+                Kiribati</option>
+              <option {% if individual.passportIssuerCountry == "Korea North" %} selected="selected" {% endif %}
+                value="Korea North">
+                Korea North</option>
+              <option {% if individual.passportIssuerCountry == "Korea South" %} selected="selected" {% endif %}
+                value="Korea Sout">
+                Korea South</option>
+              <option {% if individual.passportIssuerCountry == "Kuwait" %} selected="selected" {% endif %}
+                value="Kuwait">Kuwait
+              </option>
+              <option {% if individual.passportIssuerCountry == "Kyrgyzstan" %} selected="selected" {% endif %}
+                value="Kyrgyzstan">
+                Kyrgyzstan</option>
+              <option {% if individual.passportIssuerCountry == "Laos" %} selected="selected" {% endif %} value="Laos">
+                Laos</option>
+              <option {% if individual.passportIssuerCountry == "Latvia" %} selected="selected" {% endif %}
+                value="Latvia">Latvia
+              </option>
+              <option {% if individual.passportIssuerCountry == "Lebanon" %} selected="selected" {% endif %}
+                value="Lebanon">Lebanon
+              </option>
+              <option {% if individual.passportIssuerCountry == "Lesotho" %} selected="selected" {% endif %}
+                value="Lesotho">Lesotho
+              </option>
+              <option {% if individual.passportIssuerCountry == "Liberia" %} selected="selected" {% endif %}
+                value="Liberia">Liberia
+              </option>
+              <option {% if individual.passportIssuerCountry == "Libya" %} selected="selected" {% endif %}
+                value="Libya">Libya
+              </option>
+              <option {% if individual.passportIssuerCountry == "Liechtenstein" %} selected="selected" {% endif %}
+                value="Liechtenstein">Liechtenstein</option>
+              <option {% if individual.passportIssuerCountry == "Lithuania" %} selected="selected" {% endif %}
+                value="Lithuania">
+                Lithuania</option>
+              <option {% if individual.passportIssuerCountry == "Luxembourg" %} selected="selected" {% endif %}
+                value="Luxembourg">
+                Luxembourg</option>
+              <option {% if individual.passportIssuerCountry == "Macau" %} selected="selected" {% endif %}
+                value="Macau">Macau
+              </option>
+              <option {% if individual.passportIssuerCountry == "Macedonia" %} selected="selected" {% endif %}
+                value="Macedonia">
+                Macedonia</option>
+              <option {% if individual.passportIssuerCountry == "Madagascar" %} selected="selected" {% endif %}
+                value="Madagascar">
+                Madagascar</option>
+              <option {% if individual.passportIssuerCountry == "Malaysia" %} selected="selected" {% endif %}
+                value="Malaysia">
+                Malaysia</option>
+              <option {% if individual.passportIssuerCountry == "Malawi" %} selected="selected" {% endif %}
+                value="Malawi">Malawi
+              </option>
+              <option {% if individual.passportIssuerCountry == "Maldives" %} selected="selected" {% endif %}
+                value="Maldives">
+                Maldives</option>
+              <option {% if individual.passportIssuerCountry == "Mali" %} selected="selected" {% endif %} value="Mali">
+                Mali</option>
+              <option {% if individual.passportIssuerCountry == "Malta" %} selected="selected" {% endif %}
+                value="Malta">Malta
+              </option>
+              <option {% if individual.passportIssuerCountry == "Marshall Islands" %} selected="selected" {% endif %}
+                value="Marshall Islands">Marshall Islands</option>
+              <option {% if individual.passportIssuerCountry == "Martinique" %} selected="selected" {% endif %}
+                value="Martinique">
+                Martinique</option>
+              <option {% if individual.passportIssuerCountry == "Mauritania" %} selected="selected" {% endif %}
+                value="Mauritania">
+                Mauritania</option>
+              <option {% if individual.passportIssuerCountry == "Mauritius" %} selected="selected" {% endif %}
+                value="Mauritius">
+                Mauritius</option>
+              <option {% if individual.passportIssuerCountry == "Mayotte" %} selected="selected" {% endif %}
+                value="Mayotte">Mayotte
+              </option>
+              <option {% if individual.passportIssuerCountry == "Mexico" %} selected="selected" {% endif %}
+                value="Mexico">Mexico
+              </option>
+              <option {% if individual.passportIssuerCountry == "Midway Islands" %} selected="selected" {% endif %}
+                value="Midway Islands">Midway Islands</option>
+              <option {% if individual.passportIssuerCountry == "Moldova" %} selected="selected" {% endif %}
+                value="Moldova">Moldova
+              </option>
+              <option {% if individual.passportIssuerCountry == "Monaco" %} selected="selected" {% endif %}
+                value="Monaco">Monaco
+              </option>
+              <option {% if individual.passportIssuerCountry == "Mongolia" %} selected="selected" {% endif %}
+                value="Mongolia">
+                Mongolia</option>
+              <option {% if individual.passportIssuerCountry == "Montserrat" %} selected="selected" {% endif %}
+                value="Montserrat">
+                Montserrat</option>
+              <option {% if individual.passportIssuerCountry == "Morocco" %} selected="selected" {% endif %}
+                value="Morocco">Morocco
+              </option>
+              <option {% if individual.passportIssuerCountry == "Mozambique" %} selected="selected" {% endif %}
+                value="Mozambique">
+                Mozambique</option>
+              <option {% if individual.passportIssuerCountry == "Myanmar" %} selected="selected" {% endif %}
+                value="Myanmar">Myanmar
+              </option>
+              <option {% if individual.passportIssuerCountry == "Nambia" %} selected="selected" {% endif %}
+                value="Nambia">Nambia
+              </option>
+              <option {% if individual.passportIssuerCountry == "Nauru" %} selected="selected" {% endif %}
+                value="Nauru">Nauru
+              </option>
+              <option {% if individual.passportIssuerCountry == "Nepal" %} selected="selected" {% endif %}
+                value="Nepal">Nepal
+              </option>
+              <option {% if individual.passportIssuerCountry == "Netherland Antilles" %} selected="selected" {% endif %}
+                value="Netherland Antilles">Netherland Antilles</option>
+              <option {% if individual.passportIssuerCountry == "Netherlands (Holland, Europe)" %} selected="selected"
+                {% endif %} value="Netherlands">Netherlands (Holland, Europe)</option>
+              <option {% if individual.passportIssuerCountry == "Nevis" %} selected="selected" {% endif %}
+                value="Nevis">Nevis
+              </option>
+              <option {% if individual.passportIssuerCountry == "New Caledonia" %} selected="selected" {% endif %}
+                value="New Caledonia">New Caledonia</option>
+              <option {% if individual.passportIssuerCountry == "New Zealand" %} selected="selected" {% endif %}
+                value="New Zealand">
+                New Zealand</option>
+              <option {% if individual.passportIssuerCountry == "Nicaragua" %} selected="selected" {% endif %}
+                value="Nicaragua">
+                Nicaragua</option>
+              <option {% if individual.passportIssuerCountry == "Niger" %} selected="selected" {% endif %}
+                value="Niger">Niger
+              </option>
+              <option {% if individual.passportIssuerCountry == "Nigeria" %} selected="selected" {% endif %}
+                value="Nigeria">Nigeria
+              </option>
+              <option {% if individual.passportIssuerCountry == "Niue" %} selected="selected" {% endif %} value="Niue">
+                Niue</option>
+              <option {% if individual.passportIssuerCountry == "Norfolk Island" %} selected="selected" {% endif %}
+                value="Norfolk Island">Norfolk Island</option>
+              <option {% if individual.passportIssuerCountry == "Norway" %} selected="selected" {% endif %}
+                value="Norway">Norway
+              </option>
+              <option {% if individual.passportIssuerCountry == "Oman" %} selected="selected" {% endif %} value="Oman">
+                Oman</option>
+              <option {% if individual.passportIssuerCountry == "Pakistan" %} selected="selected" {% endif %}
+                value="Pakistan">
+                Pakistan</option>
+              <option {% if individual.passportIssuerCountry == "Palau Island" %} selected="selected" {% endif %}
+                value="Palau Island">Palau Island</option>
+              <option {% if individual.passportIssuerCountry == "Palestine" %} selected="selected" {% endif %}
+                value="Palestine">
+                Palestine</option>
+              <option {% if individual.passportIssuerCountry == "Panama" %} selected="selected" {% endif %}
+                value="Panama">Panama
+              </option>
+              <option {% if individual.passportIssuerCountry == "Papua New Guinea" %} selected="selected" {% endif %}
+                value="Papua New Guinea">Papua New Guinea</option>
+              <option {% if individual.passportIssuerCountry == "Paraguay" %} selected="selected" {% endif %}
+                value="Paraguay">
+                Paraguay</option>
+              <option {% if individual.passportIssuerCountry == "Peru" %} selected="selected" {% endif %} value="Peru">
+                Peru</option>
+              <option {% if individual.passportIssuerCountry == "Philippines" %} selected="selected" {% endif %}
+                value="Phillipines">
+                Philippines</option>
+              <option {% if individual.passportIssuerCountry == "Pitcairn Island" %} selected="selected" {% endif %}
+                value="Pitcairn Island">Pitcairn Island</option>
+              <option {% if individual.passportIssuerCountry == "Poland" %} selected="selected" {% endif %}
+                value="Poland">Poland
+              </option>
+              <option {% if individual.passportIssuerCountry == "Portugal" %} selected="selected" {% endif %}
+                value="Portugal">
+                Portugal</option>
+              <option {% if individual.passportIssuerCountry == "Puerto Rico" %} selected="selected" {% endif %}
+                value="Puerto Rico">
+                Puerto Rico</option>
+              <option {% if individual.passportIssuerCountry == "Qatar" %} selected="selected" {% endif %}
+                value="Qatar">Qatar
+              </option>
+              <option {% if individual.passportIssuerCountry == "Republic of Montenegro" %} selected="selected"
+                {% endif %} value="Republic of Montenegro">Republic of Montenegro</option>
+              <option {% if individual.passportIssuerCountry == "Republic of Serbia" %} selected="selected" {% endif %}
+                value="Republic of Serbia">Republic of Serbia</option>
+              <option {% if individual.passportIssuerCountry == "Reunion" %} selected="selected" {% endif %}
+                value="Reunion">Reunion
+              </option>
+              <option {% if individual.passportIssuerCountry == "Romania" %} selected="selected" {% endif %}
+                value="Romania">Romania
+              </option>
+              <option {% if individual.passportIssuerCountry == "Russia" %} selected="selected" {% endif %}
+                value="Russia">Russia
+              </option>
+              <option {% if individual.passportIssuerCountry == "Rwanda" %} selected="selected" {% endif %}
+                value="Rwanda">Rwanda
+              </option>
+              <option {% if individual.passportIssuerCountry == "St Barthelemy" %} selected="selected" {% endif %}
+                value="St Barthelemy">St Barthelemy</option>
+              <option {% if individual.passportIssuerCountry == "St Eustatius" %} selected="selected" {% endif %}
+                value="St Eustatius">St Eustatius</option>
+              <option {% if individual.passportIssuerCountry == "St Helena" %} selected="selected" {% endif %}
+                value="St Helena">St
+                Helena</option>
+              <option {% if individual.passportIssuerCountry == "St Kitts-Nevis" %} selected="selected" {% endif %}
+                value="St Kitts-Nevis">St Kitts-Nevis</option>
+              <option {% if individual.passportIssuerCountry == "St Lucia" %} selected="selected" {% endif %}
+                value="St Lucia">St
+                Lucia</option>
+              <option {% if individual.passportIssuerCountry == "St Maarten" %} selected="selected" {% endif %}
+                value="St Maarten">St
+                Maarten</option>
+              <option {% if individual.passportIssuerCountry == "St Pierre & Miquelon" %} selected="selected"
+                {% endif %} value="St Pierre & Miquelon">St Pierre & Miquelon</option>
+              <option {% if individual.passportIssuerCountry == "St Vincent & Grenadines" %} selected="selected"
+                {% endif %} value="St Vincent & Grenadines">St Vincent & Grenadines</option>
+              <option {% if individual.passportIssuerCountry == "Saipan" %} selected="selected" {% endif %}
+                value="Saipan">Saipan
+              </option>
+              <option {% if individual.passportIssuerCountry == "Samoa" %} selected="selected" {% endif %}
+                value="Samoa">Samoa
+              </option>
+              <option {% if individual.passportIssuerCountry == "Samoa American" %} selected="selected" {% endif %}
+                value="Samoa American">Samoa American</option>
+              <option {% if individual.passportIssuerCountry == "San Marino" %} selected="selected" {% endif %}
+                value="San Marino">San
+                Marino</option>
+              <option {% if individual.passportIssuerCountry == "Sao Tome & Principe" %} selected="selected" {% endif %}
+                value="Sao Tome & Principe">Sao Tome & Principe</option>
+              <option {% if individual.passportIssuerCountry == "Saudi Arabia" %} selected="selected" {% endif %}
+                value="Saudi Arabia">Saudi Arabia</option>
+              <option {% if individual.passportIssuerCountry == "Senegal" %} selected="selected" {% endif %}
+                value="Senegal">Senegal
+              </option>
+              <option {% if individual.passportIssuerCountry == "Seychelles" %} selected="selected" {% endif %}
+                value="Seychelles">
+                Seychelles</option>
+              <option {% if individual.passportIssuerCountry == "Sierra Leone" %} selected="selected" {% endif %}
+                value="Sierra Leone">Sierra Leone</option>
+              <option {% if individual.passportIssuerCountry == "Singapore" %} selected="selected" {% endif %}
+                value="Singapore">
+                Singapore</option>
+              <option {% if individual.passportIssuerCountry == "Slovakia" %} selected="selected" {% endif %}
+                value="Slovakia">
+                Slovakia</option>
+              <option {% if individual.passportIssuerCountry == "Slovenia" %} selected="selected" {% endif %}
+                value="Slovenia">
+                Slovenia</option>
+              <option {% if individual.passportIssuerCountry == "Solomon Islands" %} selected="selected" {% endif %}
+                value="Solomon Islands">Solomon Islands</option>
+              <option {% if individual.passportIssuerCountry == "Somalia" %} selected="selected" {% endif %}
+                value="Somalia">Somalia
+              </option>
+              <option {% if individual.passportIssuerCountry == "South Africa" %} selected="selected" {% endif %}
+                value="South Africa">South Africa</option>
+              <option {% if individual.passportIssuerCountry == "Spain" %} selected="selected" {% endif %}
+                value="Spain">Spain
+              </option>
+              <option {% if individual.passportIssuerCountry == "Sri Lanka" %} selected="selected" {% endif %}
+                value="Sri Lanka">Sri
+                Lanka</option>
+              <option {% if individual.passportIssuerCountry == "Sudan" %} selected="selected" {% endif %}
+                value="Sudan">Sudan
+              </option>
+              <option {% if individual.passportIssuerCountry == "Suriname" %} selected="selected" {% endif %}
+                value="Suriname">
+                Suriname</option>
+              <option {% if individual.passportIssuerCountry == "Swaziland" %} selected="selected" {% endif %}
+                value="Swaziland">
+                Swaziland</option>
+              <option {% if individual.passportIssuerCountry == "Sweden" %} selected="selected" {% endif %}
+                value="Sweden">Sweden
+              </option>
+              <option {% if individual.passportIssuerCountry == "Switzerland" %} selected="selected" {% endif %}
+                value="Switzerland">
+                Switzerland</option>
+              <option {% if individual.passportIssuerCountry == "Syria" %} selected="selected" {% endif %}
+                value="Syria">Syria
+              </option>
+              <option {% if individual.passportIssuerCountry == "Tahiti" %} selected="selected" {% endif %}
+                value="Tahiti">Tahiti
+              </option>
+              <option {% if individual.passportIssuerCountry == "Taiwan" %} selected="selected" {% endif %}
+                value="Taiwan">Taiwan
+              </option>
+              <option {% if individual.passportIssuerCountry == "Tajikistan" %} selected="selected" {% endif %}
+                value="Tajikistan">
+                Tajikistan</option>
+              <option {% if individual.passportIssuerCountry == "Tanzania" %} selected="selected" {% endif %}
+                value="Tanzania">
+                Tanzania</option>
+              <option {% if individual.passportIssuerCountry == "Thailand" %} selected="selected" {% endif %}
+                value="Thailand">
+                Thailand</option>
+              <option {% if individual.passportIssuerCountry == "Togo" %} selected="selected" {% endif %} value="Togo">
+                Togo</option>
+              <option {% if individual.passportIssuerCountry == "Tokelau" %} selected="selected" {% endif %}
+                value="Tokelau">Tokelau
+              </option>
+              <option {% if individual.passportIssuerCountry == "Tonga" %} selected="selected" {% endif %}
+                value="Tonga">Tonga
+              </option>
+              <option {% if individual.passportIssuerCountry == "Trinidad & Tobago" %} selected="selected" {% endif %}
+                value="Trinidad & Tobago">Trinidad & Tobago</option>
+              <option {% if individual.passportIssuerCountry == "Tunisia" %} selected="selected" {% endif %}
+                value="Tunisia">Tunisia
+              </option>
+              <option {% if individual.passportIssuerCountry == "Turkey" %} selected="selected" {% endif %}
+                value="Turkey">Turkey
+              </option>
+              <option {% if individual.passportIssuerCountry == "Turkmenistan" %} selected="selected" {% endif %}
+                value="Turkmenistan">Turkmenistan</option>
+              <option {% if individual.passportIssuerCountry == "Turks & Caicos Is" %} selected="selected" {% endif %}
+                value="Turks & Caicos Is">Turks & Caicos Is</option>
+              <option {% if individual.passportIssuerCountry == "Tuvalu" %} selected="selected" {% endif %}
+                value="Tuvalu">Tuvalu
+              </option>
+              <option {% if individual.passportIssuerCountry == "Uganda" %} selected="selected" {% endif %}
+                value="Uganda">Uganda
+              </option>
+              <option {% if individual.passportIssuerCountry == "United Kingdom" %} selected="selected" {% endif %}
+                value="United Kingdom">United Kingdom</option>
+              <option {% if individual.passportIssuerCountry == "Ukraine" %} selected="selected" {% endif %}
+                value="Ukraine">Ukraine
+              </option>
+              <option {% if individual.passportIssuerCountry == "United Arab Emirates" %} selected="selected"
+                {% endif %} value="United Arab Erimates">United Arab Emirates</option>
+              <option {% if individual.passportIssuerCountry == "United States of America" %} selected="selected"
+                {% endif %} value="United States of America">United States of America</option>
+              <option {% if individual.passportIssuerCountry == "Uruguay" %} selected="selected" {% endif %}
+                value="Uraguay">Uruguay
+              </option>
+              <option {% if individual.passportIssuerCountry == "Uzbekistan" %} selected="selected" {% endif %}
+                value="Uzbekistan">
+                Uzbekistan</option>
+              <option {% if individual.passportIssuerCountry == "Vanuatu" %} selected="selected" {% endif %}
+                value="Vanuatu">Vanuatu
+              </option>
+              <option {% if individual.passportIssuerCountry == "Vatican City State" %} selected="selected" {% endif %}
+                value="Vatican City State">Vatican City State</option>
+              <option {% if individual.passportIssuerCountry == "Venezuela" %} selected="selected" {% endif %}
+                value="Venezuela">
+                Venezuela</option>
+              <option {% if individual.passportIssuerCountry == "Vietnam" %} selected="selected" {% endif %}
+                value="Vietnam">Vietnam
+              </option>
+              <option {% if individual.passportIssuerCountry == "Virgin Islands (Brit)" %} selected="selected"
+                {% endif %} value="Virgin Islands (Brit)">Virgin Islands (Brit)</option>
+              <option {% if individual.passportIssuerCountry == "Virgin Islands (USA)" %} selected="selected"
+                {% endif %} value="Virgin Islands (USA)">Virgin Islands (USA)</option>
+              <option {% if individual.passportIssuerCountry == "Wake Island" %} selected="selected" {% endif %}
+                value="Wake Island">
+                Wake Island</option>
+              <option {% if individual.passportIssuerCountry == "Wallis & Futana Is" %} selected="selected" {% endif %}
+                value="Wallis & Futana Is">Wallis & Futana Is</option>
+              <option {% if individual.passportIssuerCountry == "Yemen" %} selected="selected" {% endif %}
+                value="Yemen">Yemen
+              </option>
+              <option {% if individual.passportIssuerCountry == "Zaire" %} selected="selected" {% endif %}
+                value="Zaire">Zaire
+              </option>
+              <option {% if individual.passportIssuerCountry == "Zambia" %} selected="selected" {% endif %}
+                value="Zambia">Zambia
+              </option>
+              <option {% if individual.passportIssuerCountry == "Zimbabwe" %} selected="selected" {% endif %}
+                value="Zimbabwe">
+                Zimbabwe</option>
+            </select>
+
+          </div>
+        </div>
+
+        <div id="div_id_passportIssueDate" class="form-group">
+          <label for="id_passportIssueDate" class="requiredField">
+            <strong class="tagz">Passport Issue Date:</strong>
+          </label>
+          <div class="">
+            <input required id="id_passportIssueDate" name="passportIssueDate" {% if individual.passportIssueDate %}
+              value="{{ individual.passportIssueDate }}" {% endif %} class="textinput textInput form-control"
+              type="text" onfocus="(this.type='date')" onblur="(this.type='text')" />
+
+          </div>
+        </div>
+
+        <div id="div_id_passportExpiryDate" class="form-group">
+          <label for="id_passportExpiryDate" class="requiredField">
+            <strong class="tagz">Passport Expiry Date:</strong>
+          </label>
+          <div class="">
+            <input required id="id_passportExpiryDate" name="passportExpiryDate" {% if individual.passportExpiryDate %}
+              value="{{ individual.passportExpiryDate }}" {% endif %} class="textinput textInput form-control"
+              type="text" onfocus="(this.type='date')" onblur="(this.type='text')" />
+          </div>
+        </div>
+        <div id="div_id_passportPhoto" class="form-group">
+          <label for="id_passportPhoto" class="requiredField">
+            <strong class="tagz">Passport Photo:</strong>
+          </label>
+          <div class="">
+            {% if individual.passportPhoto %}
+            <p> <strong>Current:</strong> <a style="color: cornflowerblue;"
+                href="{{ individual.passportPhoto.url }}">{{ individual.passportPhoto }}</a> </p> {% endif %}
+            <input type="file" name="passportPhoto" {% if individual.passportPhoto %}
+              value="{{ individual.passportPhoto }}" {% endif %} accept="image/*"
+              class="clearablefileinput form-control-file" {% if not individual.passportPhoto %} required {% endif %}
+              id="id_passportPhoto" />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <h4 class="">Contact Details:</h4>
+
+        <div id="div_id_countryOfResidence" class="form-group">
+          <label for="id_countryOfResidence" class="requiredField">
+            <strong class="tagz">Country Of Residence:</strong>
+          </label>
+          <div class="">
+            <select name="countryOfResidence" class="select form-control" required id="id_countryOfResidence">
+
+              <option {% if individual.countryOfResidence == "Afghanistan" %} selected="selected" {% endif %}
+                value="Afganistan">
+                Afghanistan</option>
+              <option {% if individual.countryOfResidence == "Albania" %} selected="selected" {% endif %}
+                value="Albania">Albania
+              </option>
+              <option {% if individual.countryOfResidence == "Algeria" %} selected="selected" {% endif %}
+                value="Algeria">Algeria
+              </option>
+              <option {% if individual.countryOfResidence == "American Samoa" %} selected="selected" {% endif %}
+                value="American Samoa">American Samoa</option>
+              <option {% if individual.countryOfResidence == "Andorra" %} selected="selected" {% endif %}
+                value="Andorra">Andorra
+              </option>
+              <option {% if individual.countryOfResidence == "Angola" %} selected="selected" {% endif %} value="Angola">
+                Angola
+              </option>
+              <option {% if individual.countryOfResidence == "Anguilla" %} selected="selected" {% endif %}
+                value="Anguilla">Anguilla
+              </option>
+              <option {% if individual.countryOfResidence == "Antigua & Barbuda" %} selected="selected" {% endif %}
+                value="Antigua & Barbuda">Antigua & Barbuda</option>
+              <option {% if individual.countryOfResidence == "Argentina" %} selected="selected" {% endif %}
+                value="Argentina">
+                Argentina</option>
+              <option {% if individual.countryOfResidence == "Armenia" %} selected="selected" {% endif %}
+                value="Armenia">Armenia
+              </option>
+              <option {% if individual.countryOfResidence == "Aruba" %} selected="selected" {% endif %} value="Aruba">
+                Aruba</option>
+              <option {% if individual.countryOfResidence == "Australia" %} selected="selected" {% endif %}
+                value="Australia">
+                Australia</option>
+              <option {% if individual.countryOfResidence == "Austria" %} selected="selected" {% endif %}
+                value="Austria">Austria
+              </option>
+              <option {% if individual.countryOfResidence == "Azerbaijan" %} selected="selected" {% endif %}
+                value="Azerbaijan">
+                Azerbaijan</option>
+              <option {% if individual.countryOfResidence == "Bahamas" %} selected="selected" {% endif %}
+                value="Bahamas">Bahamas
+              </option>
+              <option {% if individual.countryOfResidence == "Bahrain" %} selected="selected" {% endif %}
+                value="Bahrain">Bahrain
+              </option>
+              <option {% if individual.countryOfResidence == "Bangladesh" %} selected="selected" {% endif %}
+                value="Bangladesh">
+                Bangladesh</option>
+              <option {% if individual.countryOfResidence == "Barbados" %} selected="selected" {% endif %}
+                value="Barbados">Barbados
+              </option>
+              <option {% if individual.countryOfResidence == "Belarus" %} selected="selected" {% endif %}
+                value="Belarus">Belarus
+              </option>
+              <option {% if individual.countryOfResidence == "Belgium" %} selected="selected" {% endif %}
+                value="Belgium">Belgium
+              </option>
+              <option {% if individual.countryOfResidence == "Belize" %} selected="selected" {% endif %} value="Belize">
+                Belize
+              </option>
+              <option {% if individual.countryOfResidence == "Benin" %} selected="selected" {% endif %} value="Benin">
+                Benin</option>
+              <option {% if individual.countryOfResidence == "Bermuda" %} selected="selected" {% endif %}
+                value="Bermuda">Bermuda
+              </option>
+              <option {% if individual.countryOfResidence == "Bhutan" %} selected="selected" {% endif %} value="Bhutan">
+                Bhutan
+              </option>
+              <option {% if individual.countryOfResidence == "Bolivia" %} selected="selected" {% endif %}
+                value="Bolivia">Bolivia
+              </option>
+              <option {% if individual.countryOfResidence == "Bonaire" %} selected="selected" {% endif %}
+                value="Bonaire">Bonaire
+              </option>
+              <option {% if individual.countryOfResidence == "Bosnia & Herzegovina" %} selected="selected" {% endif %}
+                value="Bosnia & Herzegovina">Bosnia & Herzegovina</option>
+              <option {% if individual.countryOfResidence == "Botswana" %} selected="selected" {% endif %}
+                value="Botswana">Botswana
+              </option>
+              <option {% if individual.countryOfResidence == "Brazil" %} selected="selected" {% endif %} value="Brazil">
+                Brazil
+              </option>
+              <option {% if individual.countryOfResidence == "British Indian Ocean Ter" %} selected="selected"
+                {% endif %} value="British Indian Ocean Ter">British Indian Ocean Ter</option>
+              <option {% if individual.countryOfResidence == "Brunei" %} selected="selected" {% endif %} value="Brunei">
+                Brunei
+              </option>
+              <option {% if individual.countryOfResidence == "Bulgaria" %} selected="selected" {% endif %}
+                value="Bulgaria">Bulgaria
+              </option>
+              <option {% if individual.countryOfResidence == "Burkina Faso" %} selected="selected" {% endif %}
+                value="Burkina Faso">
+                Burkina Faso</option>
+              <option {% if individual.countryOfResidence == "Burundi" %} selected="selected" {% endif %}
+                value="Burundi">Burundi
+              </option>
+              <option {% if individual.countryOfResidence == "Cambodia" %} selected="selected" {% endif %}
+                value="Cambodia">Cambodia
+              </option>
+              <option {% if individual.countryOfResidence == "Cameroon" %} selected="selected" {% endif %}
+                value="Cameroon">Cameroon
+              </option>
+              <option {% if individual.countryOfResidence == "Canada" %} selected="selected" {% endif %} value="Canada">
+                Canada
+              </option>
+              <option {% if individual.countryOfResidence == "Canary Islands" %} selected="selected" {% endif %}
+                value="Canary Islands">Canary Islands</option>
+              <option {% if individual.countryOfResidence == "Cape Verde" %} selected="selected" {% endif %}
+                value="Cape Verde">Cape
+                Verde</option>
+              <option {% if individual.countryOfResidence == "Cayman Islands" %} selected="selected" {% endif %}
+                value="Cayman Islands">Cayman Islands</option>
+              <option {% if individual.countryOfResidence == "Central African Republic" %} selected="selected"
+                {% endif %} value="Central African Republic">Central African Republic</option>
+              <option {% if individual.countryOfResidence == "Chad" %} selected="selected" {% endif %} value="Chad">Chad
+              </option>
+              <option {% if individual.countryOfResidence == "Channel Islands" %} selected="selected" {% endif %}
+                value="Channel Islands">Channel Islands</option>
+              <option {% if individual.countryOfResidence == "Chile" %} selected="selected" {% endif %} value="Chile">
+                Chile</option>
+              <option {% if individual.countryOfResidence == "China" %} selected="selected" {% endif %} value="China">
+                China</option>
+              <option {% if individual.countryOfResidence == "Christmas Island" %} selected="selected" {% endif %}
+                value="Christmas Island">Christmas Island</option>
+              <option {% if individual.countryOfResidence == "Cocos Island" %} selected="selected" {% endif %}
+                value="Cocos Island">
+                Cocos Island</option>
+              <option {% if individual.countryOfResidence == "Colombia" %} selected="selected" {% endif %}
+                value="Colombia">Colombia
+              </option>
+              <option {% if individual.countryOfResidence == "Comoros" %} selected="selected" {% endif %}
+                value="Comoros">Comoros
+              </option>
+              <option {% if individual.countryOfResidence == "Congo" %} selected="selected" {% endif %} value="Congo">
+                Congo</option>
+              <option {% if individual.countryOfResidence == "Cook Islands" %} selected="selected" {% endif %}
+                value="Cook Islands">
+                Cook Islands</option>
+              <option {% if individual.countryOfResidence == "Costa Rica" %} selected="selected" {% endif %}
+                value="Costa Rica">Costa
+                Rica</option>
+              <option {% if individual.countryOfResidence == "Cote DIvoire" %} selected="selected" {% endif %}
+                value="Cote DIvoire">
+                Cote DIvoire</option>
+              <option {% if individual.countryOfResidence == "Croatia" %} selected="selected" {% endif %}
+                value="Croatia">Croatia
+              </option>
+              <option {% if individual.countryOfResidence == "Cuba" %} selected="selected" {% endif %} value="Cuba">Cuba
+              </option>
+              <option {% if individual.countryOfResidence == "Curacao" %} selected="selected" {% endif %}
+                value="Curaco">Curacao
+              </option>
+              <option {% if individual.countryOfResidence == "Cyprus" %} selected="selected" {% endif %} value="Cyprus">
+                Cyprus
+              </option>
+              <option {% if individual.countryOfResidence == "Czech Republic" %} selected="selected" {% endif %}
+                value="Czech Republic">Czech Republic</option>
+              <option {% if individual.countryOfResidence == "Denmark" %} selected="selected" {% endif %}
+                value="Denmark">Denmark
+              </option>
+              <option {% if individual.countryOfResidence == "Djibouti" %} selected="selected" {% endif %}
+                value="Djibouti">Djibouti
+              </option>
+              <option {% if individual.countryOfResidence == "Dominica" %} selected="selected" {% endif %}
+                value="Dominica">Dominica
+              </option>
+              <option {% if individual.countryOfResidence == "Dominican Republic" %} selected="selected" {% endif %}
+                value="Dominican Republic">Dominican Republic</option>
+              <option {% if individual.countryOfResidence == "East Timor" %} selected="selected" {% endif %}
+                value="East Timor">East
+                Timor</option>
+              <option {% if individual.countryOfResidence == "Ecuador" %} selected="selected" {% endif %}
+                value="Ecuador">Ecuador
+              </option>
+              <option {% if individual.countryOfResidence == "Egypt" %} selected="selected" {% endif %} value="Egypt">
+                Egypt</option>
+              <option {% if individual.countryOfResidence == "El Salvador" %} selected="selected" {% endif %}
+                value="El Salvador">El
+                Salvador</option>
+              <option {% if individual.countryOfResidence == "Equatorial Guinea" %} selected="selected" {% endif %}
+                value="Equatorial Guinea">Equatorial Guinea</option>
+              <option {% if individual.countryOfResidence == "Eritrea" %} selected="selected" {% endif %}
+                value="Eritrea">Eritrea
+              </option>
+              <option {% if individual.countryOfResidence == "Estonia" %} selected="selected" {% endif %}
+                value="Estonia">Estonia
+              </option>
+              <option {% if individual.countryOfResidence == "Ethiopia" %} selected="selected" {% endif %}
+                value="Ethiopia">Ethiopia
+              </option>
+              <option {% if individual.countryOfResidence == "Falkland Islands" %} selected="selected" {% endif %}
+                value="Falkland Islands">Falkland Islands</option>
+              <option {% if individual.countryOfResidence == "Faroe Islands" %} selected="selected" {% endif %}
+                value="Faroe Islands">
+                Faroe Islands</option>
+              <option {% if individual.countryOfResidence == "Fiji" %} selected="selected" {% endif %} value="Fiji">Fiji
+              </option>
+              <option {% if individual.countryOfResidence == "Finland" %} selected="selected" {% endif %}
+                value="Finland">Finland
+              </option>
+              <option {% if individual.countryOfResidence == "France" %} selected="selected" {% endif %} value="France">
+                France
+              </option>
+              <option {% if individual.countryOfResidence == "French Guiana" %} selected="selected" {% endif %}
+                value="French Guiana">
+                French Guiana</option>
+              <option {% if individual.countryOfResidence == "French Polynesia" %} selected="selected" {% endif %}
+                value="French Polynesia">French Polynesia</option>
+              <option {% if individual.countryOfResidence == "French Southern Ter" %} selected="selected" {% endif %}
+                value="French Southern Ter">French Southern Ter</option>
+              <option {% if individual.countryOfResidence == "Gabon" %} selected="selected" {% endif %} value="Gabon">
+                Gabon</option>
+              <option {% if individual.countryOfResidence == "Gambia" %} selected="selected" {% endif %} value="Gambia">
+                Gambia
+              </option>
+              <option {% if individual.countryOfResidence == "Georgia" %} selected="selected" {% endif %}
+                value="Georgia">Georgia
+              </option>
+              <option {% if individual.countryOfResidence == "Germany" %} selected="selected" {% endif %}
+                value="Germany">Germany
+              </option>
+              <option {% if individual.countryOfResidence == "Ghana" %} selected="selected" {% endif %} value="Ghana">
+                Ghana</option>
+              <option {% if individual.countryOfResidence == "Gibraltar" %} selected="selected" {% endif %}
+                value="Gibraltar">
+                Gibraltar</option>
+              <option {% if individual.countryOfResidence == "Great Britain" %} selected="selected" {% endif %}
+                value="Great Britain">
+                Great Britain</option>
+              <option {% if individual.countryOfResidence == "Greece" %} selected="selected" {% endif %} value="Greece">
+                Greece
+              </option>
+              <option {% if individual.countryOfResidence == "Greenland" %} selected="selected" {% endif %}
+                value="Greenland">
+                Greenland</option>
+              <option {% if individual.countryOfResidence == "Grenada" %} selected="selected" {% endif %}
+                value="Grenada">Grenada
+              </option>
+              <option {% if individual.countryOfResidence == "Guadeloupe" %} selected="selected" {% endif %}
+                value="Guadeloupe">
+                Guadeloupe</option>
+              <option {% if individual.countryOfResidence == "Guam" %} selected="selected" {% endif %} value="Guam">Guam
+              </option>
+              <option {% if individual.countryOfResidence == "Guatemala" %} selected="selected" {% endif %}
+                value="Guatemala">
+                Guatemala</option>
+              <option {% if individual.countryOfResidence == "Guinea" %} selected="selected" {% endif %} value="Guinea">
+                Guinea
+              </option>
+              <option {% if individual.countryOfResidence == "Guyana" %} selected="selected" {% endif %} value="Guyana">
+                Guyana
+              </option>
+              <option {% if individual.countryOfResidence == "Haiti" %} selected="selected" {% endif %} value="Haiti">
+                Haiti</option>
+              <option {% if individual.countryOfResidence == "Hawaii" %} selected="selected" {% endif %} value="Hawaii">
+                Hawaii
+              </option>
+              <option {% if individual.countryOfResidence == "Honduras" %} selected="selected" {% endif %}
+                value="Honduras">Honduras
+              </option>
+              <option {% if individual.countryOfResidence == "Hong Kong" %} selected="selected" {% endif %}
+                value="Hong Kong">Hong
+                Kong</option>
+              <option {% if individual.countryOfResidence == "Hungary" %} selected="selected" {% endif %}
+                value="Hungary">Hungary
+              </option>
+              <option {% if individual.countryOfResidence == "Iceland" %} selected="selected" {% endif %}
+                value="Iceland">Iceland
+              </option>
+              <option {% if individual.countryOfResidence == "Indonesia" %} selected="selected" {% endif %}
+                value="Indonesia">
+                Indonesia</option>
+              <option {% if individual.countryOfResidence == "India" %} selected="selected" {% endif %} value="India">
+                India</option>
+              <option {% if individual.countryOfResidence == "Iran" %} selected="selected" {% endif %} value="Iran">Iran
+              </option>
+              <option {% if individual.countryOfResidence == "Iraq" %} selected="selected" {% endif %} value="Iraq">Iraq
+              </option>
+              <option {% if individual.countryOfResidence == "Ireland" %} selected="selected" {% endif %}
+                value="Ireland">Ireland
+              </option>
+              <option {% if individual.countryOfResidence == "Isle of Man" %} selected="selected" {% endif %}
+                value="Isle of Man">Isle
+                of Man</option>
+              <option {% if individual.countryOfResidence == "Israel" %} selected="selected" {% endif %} value="Israel">
+                Israel
+              </option>
+              <option {% if individual.countryOfResidence == "Italy" %} selected="selected" {% endif %} value="Italy">
+                Italy</option>
+              <option {% if individual.countryOfResidence == "Jamaica" %} selected="selected" {% endif %}
+                value="Jamaica">Jamaica
+              </option>
+              <option {% if individual.countryOfResidence == "Japan" %} selected="selected" {% endif %} value="Japan">
+                Japan</option>
+              <option {% if individual.countryOfResidence == "Jordan" %} selected="selected" {% endif %} value="Jordan">
+                Jordan
+              </option>
+              <option {% if individual.countryOfResidence == "Kazakhstan" %} selected="selected" {% endif %}
+                value="Kazakhstan">
+                Kazakhstan</option>
+              <option {% if individual.countryOfResidence == "Kenya" %} selected="selected" {% endif %} value="Kenya">
+                Kenya</option>
+              <option {% if individual.countryOfResidence == "Kiribati" %} selected="selected" {% endif %}
+                value="Kiribati">Kiribati
+              </option>
+              <option {% if individual.countryOfResidence == "Korea North" %} selected="selected" {% endif %}
+                value="Korea North">
+                Korea North</option>
+              <option {% if individual.countryOfResidence == "Korea South" %} selected="selected" {% endif %}
+                value="Korea Sout">Korea
+                South</option>
+              <option {% if individual.countryOfResidence == "Kuwait" %} selected="selected" {% endif %} value="Kuwait">
+                Kuwait
+              </option>
+              <option {% if individual.countryOfResidence == "Kyrgyzstan" %} selected="selected" {% endif %}
+                value="Kyrgyzstan">
+                Kyrgyzstan</option>
+              <option {% if individual.countryOfResidence == "Laos" %} selected="selected" {% endif %} value="Laos">Laos
+              </option>
+              <option {% if individual.countryOfResidence == "Latvia" %} selected="selected" {% endif %} value="Latvia">
+                Latvia
+              </option>
+              <option {% if individual.countryOfResidence == "Lebanon" %} selected="selected" {% endif %}
+                value="Lebanon">Lebanon
+              </option>
+              <option {% if individual.countryOfResidence == "Lesotho" %} selected="selected" {% endif %}
+                value="Lesotho">Lesotho
+              </option>
+              <option {% if individual.countryOfResidence == "Liberia" %} selected="selected" {% endif %}
+                value="Liberia">Liberia
+              </option>
+              <option {% if individual.countryOfResidence == "Libya" %} selected="selected" {% endif %} value="Libya">
+                Libya</option>
+              <option {% if individual.countryOfResidence == "Liechtenstein" %} selected="selected" {% endif %}
+                value="Liechtenstein">
+                Liechtenstein</option>
+              <option {% if individual.countryOfResidence == "Lithuania" %} selected="selected" {% endif %}
+                value="Lithuania">
+                Lithuania</option>
+              <option {% if individual.countryOfResidence == "Luxembourg" %} selected="selected" {% endif %}
+                value="Luxembourg">
+                Luxembourg</option>
+              <option {% if individual.countryOfResidence == "Macau" %} selected="selected" {% endif %} value="Macau">
+                Macau</option>
+              <option {% if individual.countryOfResidence == "Macedonia" %} selected="selected" {% endif %}
+                value="Macedonia">
+                Macedonia</option>
+              <option {% if individual.countryOfResidence == "Madagascar" %} selected="selected" {% endif %}
+                value="Madagascar">
+                Madagascar</option>
+              <option {% if individual.countryOfResidence == "Malaysia" %} selected="selected" {% endif %}
+                value="Malaysia">Malaysia
+              </option>
+              <option {% if individual.countryOfResidence == "Malawi" %} selected="selected" {% endif %} value="Malawi">
+                Malawi
+              </option>
+              <option {% if individual.countryOfResidence == "Maldives" %} selected="selected" {% endif %}
+                value="Maldives">Maldives
+              </option>
+              <option {% if individual.countryOfResidence == "Mali" %} selected="selected" {% endif %} value="Mali">Mali
+              </option>
+              <option {% if individual.countryOfResidence == "Malta" %} selected="selected" {% endif %} value="Malta">
+                Malta</option>
+              <option {% if individual.countryOfResidence == "Marshall Islands" %} selected="selected" {% endif %}
+                value="Marshall Islands">Marshall Islands</option>
+              <option {% if individual.countryOfResidence == "Martinique" %} selected="selected" {% endif %}
+                value="Martinique">
+                Martinique</option>
+              <option {% if individual.countryOfResidence == "Mauritania" %} selected="selected" {% endif %}
+                value="Mauritania">
+                Mauritania</option>
+              <option {% if individual.countryOfResidence == "Mauritius" %} selected="selected" {% endif %}
+                value="Mauritius">
+                Mauritius</option>
+              <option {% if individual.countryOfResidence == "Mayotte" %} selected="selected" {% endif %}
+                value="Mayotte">Mayotte
+              </option>
+              <option {% if individual.countryOfResidence == "Mexico" %} selected="selected" {% endif %} value="Mexico">
+                Mexico
+              </option>
+              <option {% if individual.countryOfResidence == "Midway Islands" %} selected="selected" {% endif %}
+                value="Midway Islands">Midway Islands</option>
+              <option {% if individual.countryOfResidence == "Moldova" %} selected="selected" {% endif %}
+                value="Moldova">Moldova
+              </option>
+              <option {% if individual.countryOfResidence == "Monaco" %} selected="selected" {% endif %} value="Monaco">
+                Monaco
+              </option>
+              <option {% if individual.countryOfResidence == "Mongolia" %} selected="selected" {% endif %}
+                value="Mongolia">Mongolia
+              </option>
+              <option {% if individual.countryOfResidence == "Montserrat" %} selected="selected" {% endif %}
+                value="Montserrat">
+                Montserrat</option>
+              <option {% if individual.countryOfResidence == "Morocco" %} selected="selected" {% endif %}
+                value="Morocco">Morocco
+              </option>
+              <option {% if individual.countryOfResidence == "Mozambique" %} selected="selected" {% endif %}
+                value="Mozambique">
+                Mozambique</option>
+              <option {% if individual.countryOfResidence == "Myanmar" %} selected="selected" {% endif %}
+                value="Myanmar">Myanmar
+              </option>
+              <option {% if individual.countryOfResidence == "Nambia" %} selected="selected" {% endif %} value="Nambia">
+                Nambia
+              </option>
+              <option {% if individual.countryOfResidence == "Nauru" %} selected="selected" {% endif %} value="Nauru">
+                Nauru</option>
+              <option {% if individual.countryOfResidence == "Nepal" %} selected="selected" {% endif %} value="Nepal">
+                Nepal</option>
+              <option {% if individual.countryOfResidence == "Netherland Antilles" %} selected="selected" {% endif %}
+                value="Netherland Antilles">Netherland Antilles</option>
+              <option {% if individual.countryOfResidence == "Netherlands (Holland, Europe)" %} selected="selected"
+                {% endif %} value="Netherlands">Netherlands (Holland, Europe)</option>
+              <option {% if individual.countryOfResidence == "Nevis" %} selected="selected" {% endif %} value="Nevis">
+                Nevis</option>
+              <option {% if individual.countryOfResidence == "New Caledonia" %} selected="selected" {% endif %}
+                value="New Caledonia">
+                New Caledonia</option>
+              <option {% if individual.countryOfResidence == "New Zealand" %} selected="selected" {% endif %}
+                value="New Zealand">New
+                Zealand</option>
+              <option {% if individual.countryOfResidence == "Nicaragua" %} selected="selected" {% endif %}
+                value="Nicaragua">
+                Nicaragua</option>
+              <option {% if individual.countryOfResidence == "Niger" %} selected="selected" {% endif %} value="Niger">
+                Niger</option>
+              <option {% if individual.countryOfResidence == "Nigeria" %} selected="selected" {% endif %}
+                value="Nigeria">Nigeria
+              </option>
+              <option {% if individual.countryOfResidence == "Niue" %} selected="selected" {% endif %} value="Niue">Niue
+              </option>
+              <option {% if individual.countryOfResidence == "Norfolk Island" %} selected="selected" {% endif %}
+                value="Norfolk Island">Norfolk Island</option>
+              <option {% if individual.countryOfResidence == "Norway" %} selected="selected" {% endif %} value="Norway">
+                Norway
+              </option>
+              <option {% if individual.countryOfResidence == "Oman" %} selected="selected" {% endif %} value="Oman">Oman
+              </option>
+              <option {% if individual.countryOfResidence == "Pakistan" %} selected="selected" {% endif %}
+                value="Pakistan">Pakistan
+              </option>
+              <option {% if individual.countryOfResidence == "Palau Island" %} selected="selected" {% endif %}
+                value="Palau Island">
+                Palau Island</option>
+              <option {% if individual.countryOfResidence == "Palestine" %} selected="selected" {% endif %}
+                value="Palestine">
+                Palestine</option>
+              <option {% if individual.countryOfResidence == "Panama" %} selected="selected" {% endif %} value="Panama">
+                Panama
+              </option>
+              <option {% if individual.countryOfResidence == "Papua New Guinea" %} selected="selected" {% endif %}
+                value="Papua New Guinea">Papua New Guinea</option>
+              <option {% if individual.countryOfResidence == "Paraguay" %} selected="selected" {% endif %}
+                value="Paraguay">Paraguay
+              </option>
+              <option {% if individual.countryOfResidence == "Peru" %} selected="selected" {% endif %} value="Peru">Peru
+              </option>
+              <option {% if individual.countryOfResidence == "Philippines" %} selected="selected" {% endif %}
+                value="Phillipines">
+                Philippines</option>
+              <option {% if individual.countryOfResidence == "Pitcairn Island" %} selected="selected" {% endif %}
+                value="Pitcairn Island">Pitcairn Island</option>
+              <option {% if individual.countryOfResidence == "Poland" %} selected="selected" {% endif %} value="Poland">
+                Poland
+              </option>
+              <option {% if individual.countryOfResidence == "Portugal" %} selected="selected" {% endif %}
+                value="Portugal">Portugal
+              </option>
+              <option {% if individual.countryOfResidence == "Puerto Rico" %} selected="selected" {% endif %}
+                value="Puerto Rico">
+                Puerto Rico</option>
+              <option {% if individual.countryOfResidence == "Qatar" %} selected="selected" {% endif %} value="Qatar">
+                Qatar</option>
+              <option {% if individual.countryOfResidence == "Republic of Montenegro" %} selected="selected" {% endif %}
+                value="Republic of Montenegro">Republic of Montenegro</option>
+              <option {% if individual.countryOfResidence == "Republic of Serbia" %} selected="selected" {% endif %}
+                value="Republic of Serbia">Republic of Serbia</option>
+              <option {% if individual.countryOfResidence == "Reunion" %} selected="selected" {% endif %}
+                value="Reunion">Reunion
+              </option>
+              <option {% if individual.countryOfResidence == "Romania" %} selected="selected" {% endif %}
+                value="Romania">Romania
+              </option>
+              <option {% if individual.countryOfResidence == "Russia" %} selected="selected" {% endif %} value="Russia">
+                Russia
+              </option>
+              <option {% if individual.countryOfResidence == "Rwanda" %} selected="selected" {% endif %} value="Rwanda">
+                Rwanda
+              </option>
+              <option {% if individual.countryOfResidence == "St Barthelemy" %} selected="selected" {% endif %}
+                value="St Barthelemy">
+                St Barthelemy</option>
+              <option {% if individual.countryOfResidence == "St Eustatius" %} selected="selected" {% endif %}
+                value="St Eustatius">St
+                Eustatius</option>
+              <option {% if individual.countryOfResidence == "St Helena" %} selected="selected" {% endif %}
+                value="St Helena">St
+                Helena</option>
+              <option {% if individual.countryOfResidence == "St Kitts-Nevis" %} selected="selected" {% endif %}
+                value="St Kitts-Nevis">St Kitts-Nevis</option>
+              <option {% if individual.countryOfResidence == "St Lucia" %} selected="selected" {% endif %}
+                value="St Lucia">St Lucia
+              </option>
+              <option {% if individual.countryOfResidence == "St Maarten" %} selected="selected" {% endif %}
+                value="St Maarten">St
+                Maarten</option>
+              <option {% if individual.countryOfResidence == "St Pierre & Miquelon" %} selected="selected" {% endif %}
+                value="St Pierre & Miquelon">St Pierre & Miquelon</option>
+              <option {% if individual.countryOfResidence == "St Vincent & Grenadines" %} selected="selected"
+                {% endif %} value="St Vincent & Grenadines">St Vincent & Grenadines</option>
+              <option {% if individual.countryOfResidence == "Saipan" %} selected="selected" {% endif %} value="Saipan">
+                Saipan
+              </option>
+              <option {% if individual.countryOfResidence == "Samoa" %} selected="selected" {% endif %} value="Samoa">
+                Samoa</option>
+              <option {% if individual.countryOfResidence == "Samoa American" %} selected="selected" {% endif %}
+                value="Samoa American">Samoa American</option>
+              <option {% if individual.countryOfResidence == "San Marino" %} selected="selected" {% endif %}
+                value="San Marino">San
+                Marino</option>
+              <option {% if individual.countryOfResidence == "Sao Tome & Principe" %} selected="selected" {% endif %}
+                value="Sao Tome & Principe">Sao Tome & Principe</option>
+              <option {% if individual.countryOfResidence == "Saudi Arabia" %} selected="selected" {% endif %}
+                value="Saudi Arabia">
+                Saudi Arabia</option>
+              <option {% if individual.countryOfResidence == "Senegal" %} selected="selected" {% endif %}
+                value="Senegal">Senegal
+              </option>
+              <option {% if individual.countryOfResidence == "Seychelles" %} selected="selected" {% endif %}
+                value="Seychelles">
+                Seychelles</option>
+              <option {% if individual.countryOfResidence == "Sierra Leone" %} selected="selected" {% endif %}
+                value="Sierra Leone">
+                Sierra Leone</option>
+              <option {% if individual.countryOfResidence == "Singapore" %} selected="selected" {% endif %}
+                value="Singapore">
+                Singapore</option>
+              <option {% if individual.countryOfResidence == "Slovakia" %} selected="selected" {% endif %}
+                value="Slovakia">Slovakia
+              </option>
+              <option {% if individual.countryOfResidence == "Slovenia" %} selected="selected" {% endif %}
+                value="Slovenia">Slovenia
+              </option>
+              <option {% if individual.countryOfResidence == "Solomon Islands" %} selected="selected" {% endif %}
+                value="Solomon Islands">Solomon Islands</option>
+              <option {% if individual.countryOfResidence == "Somalia" %} selected="selected" {% endif %}
+                value="Somalia">Somalia
+              </option>
+              <option {% if individual.countryOfResidence == "South Africa" %} selected="selected" {% endif %}
+                value="South Africa">
+                South Africa</option>
+              <option {% if individual.countryOfResidence == "Spain" %} selected="selected" {% endif %} value="Spain">
+                Spain</option>
+              <option {% if individual.countryOfResidence == "Sri Lanka" %} selected="selected" {% endif %}
+                value="Sri Lanka">Sri
+                Lanka</option>
+              <option {% if individual.countryOfResidence == "Sudan" %} selected="selected" {% endif %} value="Sudan">
+                Sudan</option>
+              <option {% if individual.countryOfResidence == "Suriname" %} selected="selected" {% endif %}
+                value="Suriname">Suriname
+              </option>
+              <option {% if individual.countryOfResidence == "Swaziland" %} selected="selected" {% endif %}
+                value="Swaziland">
+                Swaziland</option>
+              <option {% if individual.countryOfResidence == "Sweden" %} selected="selected" {% endif %} value="Sweden">
+                Sweden
+              </option>
+              <option {% if individual.countryOfResidence == "Switzerland" %} selected="selected" {% endif %}
+                value="Switzerland">
+                Switzerland</option>
+              <option {% if individual.countryOfResidence == "Syria" %} selected="selected" {% endif %} value="Syria">
+                Syria</option>
+              <option {% if individual.countryOfResidence == "Tahiti" %} selected="selected" {% endif %} value="Tahiti">
+                Tahiti
+              </option>
+              <option {% if individual.countryOfResidence == "Taiwan" %} selected="selected" {% endif %} value="Taiwan">
+                Taiwan
+              </option>
+              <option {% if individual.countryOfResidence == "Tajikistan" %} selected="selected" {% endif %}
+                value="Tajikistan">
+                Tajikistan</option>
+              <option {% if individual.countryOfResidence == "Tanzania" %} selected="selected" {% endif %}
+                value="Tanzania">Tanzania
+              </option>
+              <option {% if individual.countryOfResidence == "Thailand" %} selected="selected" {% endif %}
+                value="Thailand">Thailand
+              </option>
+              <option {% if individual.countryOfResidence == "Togo" %} selected="selected" {% endif %} value="Togo">Togo
+              </option>
+              <option {% if individual.countryOfResidence == "Tokelau" %} selected="selected" {% endif %}
+                value="Tokelau">Tokelau
+              </option>
+              <option {% if individual.countryOfResidence == "Tonga" %} selected="selected" {% endif %} value="Tonga">
+                Tonga</option>
+              <option {% if individual.countryOfResidence == "Trinidad & Tobago" %} selected="selected" {% endif %}
+                value="Trinidad & Tobago">Trinidad & Tobago</option>
+              <option {% if individual.countryOfResidence == "Tunisia" %} selected="selected" {% endif %}
+                value="Tunisia">Tunisia
+              </option>
+              <option {% if individual.countryOfResidence == "Turkey" %} selected="selected" {% endif %} value="Turkey">
+                Turkey
+              </option>
+              <option {% if individual.countryOfResidence == "Turkmenistan" %} selected="selected" {% endif %}
+                value="Turkmenistan">
+                Turkmenistan</option>
+              <option {% if individual.countryOfResidence == "Turks & Caicos Is" %} selected="selected" {% endif %}
+                value="Turks & Caicos Is">Turks & Caicos Is</option>
+              <option {% if individual.countryOfResidence == "Tuvalu" %} selected="selected" {% endif %} value="Tuvalu">
+                Tuvalu
+              </option>
+              <option {% if individual.countryOfResidence == "Uganda" %} selected="selected" {% endif %} value="Uganda">
+                Uganda
+              </option>
+              <option {% if individual.countryOfResidence == "United Kingdom" %} selected="selected" {% endif %}
+                value="United Kingdom">United Kingdom</option>
+              <option {% if individual.countryOfResidence == "Ukraine" %} selected="selected" {% endif %}
+                value="Ukraine">Ukraine
+              </option>
+              <option {% if individual.countryOfResidence == "United Arab Emirates" %} selected="selected" {% endif %}
+                value="United Arab Erimates">United Arab Emirates</option>
+              <option {% if individual.countryOfResidence == "United States of America" %} selected="selected"
+                {% endif %} value="United States of America">United States of America</option>
+              <option {% if individual.countryOfResidence == "Uruguay" %} selected="selected" {% endif %}
+                value="Uraguay">Uruguay
+              </option>
+              <option {% if individual.countryOfResidence == "Uzbekistan" %} selected="selected" {% endif %}
+                value="Uzbekistan">
+                Uzbekistan</option>
+              <option {% if individual.countryOfResidence == "Vanuatu" %} selected="selected" {% endif %}
+                value="Vanuatu">Vanuatu
+              </option>
+              <option {% if individual.countryOfResidence == "Vatican City State" %} selected="selected" {% endif %}
+                value="Vatican City State">Vatican City State</option>
+              <option {% if individual.countryOfResidence == "Venezuela" %} selected="selected" {% endif %}
+                value="Venezuela">
+                Venezuela</option>
+              <option {% if individual.countryOfResidence == "Vietnam" %} selected="selected" {% endif %}
+                value="Vietnam">Vietnam
+              </option>
+              <option {% if individual.countryOfResidence == "Virgin Islands (Brit)" %} selected="selected" {% endif %}
+                value="Virgin Islands (Brit)">Virgin Islands (Brit)</option>
+              <option {% if individual.countryOfResidence == "Virgin Islands (USA)" %} selected="selected" {% endif %}
+                value="Virgin Islands (USA)">Virgin Islands (USA)</option>
+              <option {% if individual.countryOfResidence == "Wake Island" %} selected="selected" {% endif %}
+                value="Wake Island">Wake
+                Island</option>
+              <option {% if individual.countryOfResidence == "Wallis & Futana Is" %} selected="selected" {% endif %}
+                value="Wallis & Futana Is">Wallis & Futana Is</option>
+              <option {% if individual.countryOfResidence == "Yemen" %} selected="selected" {% endif %} value="Yemen">
+                Yemen</option>
+              <option {% if individual.countryOfResidence == "Zaire" %} selected="selected" {% endif %} value="Zaire">
+                Zaire</option>
+              <option {% if individual.countryOfResidence == "Zambia" %} selected="selected" {% endif %} value="Zambia">
+                Zambia
+              </option>
+              <option {% if individual.countryOfResidence == "Zimbabwe" %} selected="selected" {% endif %}
+                value="Zimbabwe">Zimbabwe
+              </option>
+
+            </select>
+          </div>
+        </div>
+
+        <div id="div_id_yearsAtResidence" class="form-group">
+          <label for="id_yearsAtResidence" class="requiredField">
+            <strong class="tagz">Years At Residence:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="yearsAtResidence" {% if individual.yearsAtResidence %}
+              value="{{ individual.yearsAtResidence }}" {% endif %} maxlength="60"
+              class="textinput textInput form-control" required id="id_yearsAtResidence" />
+          </div>
+        </div>
+
+        <div id="div_id_residentialStatus" class="form-group">
+          <label for="id_residentialStatus" class="requiredField">
+            <strong class="tagz">Residential Status:</strong>
+          </label>
+          <div class="">
+            <select name="residentialStatus" class="select form-control" required id="id_residentialStatus">
+              <option value="Owned" {% if individual.residentialStatus == "Owned" %} selected="selected" {% endif %}>
+                Owned</option>
+              <option value="Rented" {% if individual.residentialStatus == "Rented" %} selected="selected" {% endif %}>
+                Rented
+              </option>
+              <option value="Mortgaged" {% if individual.residentialStatus == "Mortgaged" %} selected="selected"
+                {% endif %}>
+                Mortgaged</option>
+              <option value="Company Owned" {% if individual.residentialStatus == "Company Owned" %} selected="selected"
+                {% endif %}>Company Owned</option>
+              <option value="Staying With Parents" {% if individual.residentialStatus == "Staying With Parents" %}
+                selected="selected" {% endif %}>Staying With Parents</option>
+              <option value="Other" {% if individual.residentialStatus == "Other" %} selected="selected" {% endif %}>
+                Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="div_id_kin_fname" class="form-group">
+          <label for="id_kin_fname" class="requiredField">
+            <strong class="tagz">Kin Firstname:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="kin_fname" {% if individual.kin_fname %} value="{{ individual.kin_fname }}"
+              {% endif %} maxlength="60" class="textinput textInput form-control" required id="id_kin_fname" />
+          </div>
+        </div>
+        <div id="div_id_kin_sname" class="form-group">
+          <label for="id_kin_sname" class="requiredField">
+            <strong class="tagz">Kin Surname:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="kin_sname" {% if individual.kin_sname %} value="{{ individual.kin_sname }}"
+              {% endif %} maxlength="60" class="textinput textInput form-control" required id="id_kin_sname" />
+          </div>
+        </div>
+        <div id="div_id_kin_phone" class="form-group">
+          <label for="id_kin_phone" class="requiredField">
+            <strong class="tagz">Kin Phone:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="kin_phone" {% if individual.kin_phone %} value="{{ individual.kin_phone }}"
+              {% endif %} maxlength="60" class="textinput textInput form-control" required id="id_kin_phone" />
+          </div>
+        </div>
+        <div id="div_id_kin_address" class="form-group">
+          <label for="id_kin_address" class="requiredField">
+            <strong class="tagz">Kin Address:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="kin_address" {% if individual.kin_address %} value="{{ individual.kin_address }}"
+              {% endif %} maxlength="60" class="textinput textInput form-control" required id="id_kin_address" />
+          </div>
+        </div>
+        <div id="div_id_kin_passportPhoto" class="form-group">
+          <label for="id_kin_passportPhoto" class="requiredField">
+            <strong class="tagz">Kin Passport Photo:</strong>
+          </label>
+          <div class="">
+            {% if individual.kin_passportPhoto %}
+            <p> <strong>Current:</strong> <a style="color: cornflowerblue;"
+                href="{{ individual.kin_passportPhoto.url }}">{{ individual.kin_passportPhoto }}</a> </p> {% endif %}
+            <input type="file" name="kin_passportPhoto" accept="image/*" class="clearablefileinput form-control-file"
+              {% if not individual.kin_passportPhoto %} required {% endif %} id="id_kin_passportPhoto" />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <h4 class="">Work & Financial Details:</h4>
+        <div id="div_id_workAddress" class="form-group">
+          <label for="id_workAddress" class="requiredField">
+            <strong class="tagz">Work Address:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="workAddress" {% if individual.workAddress %} value="{{ individual.workAddress }}"
+              {% endif %} maxlength="60" class="textinput textInput form-control" required id="id_workAddress" />
+          </div>
+        </div>
+        <div id="div_id_workPhone" class="form-group">
+          <label for="id_workPhone" class="requiredField">
+            <strong class="tagz">Work Phone:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="workPhone" {% if individual.workPhone %} value="{{ individual.workPhone }}"
+              {% endif %} maxlength="60" class="textinput textInput form-control" required id="id_workPhone" />
+          </div>
+        </div>
+        <div id="div_id_workDesignation" class="form-group">
+          <label for="id_workDesignation" class="requiredField">
+            <strong class="tagz">Work Designation:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="workDesignation" {% if individual.workDesignation %}
+              value="{{ individual.workDesignation }}" {% endif %} maxlength="60"
+              class="textinput textInput form-control" required id="id_workDesignation" />
+          </div>
+        </div>
+        <div id="div_id_sourceOfIncome" class="form-group">
+          <label for="id_sourceOfIncome" class="requiredField">
+            <strong class="tagz">Source Of Income:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="sourceOfIncome" {% if individual.sourceOfIncome %}
+              value="{{ individual.sourceOfIncome }}" {% endif %} maxlength="60"
+              class="textinput textInput form-control" required id="id_sourceOfIncome" />
+          </div>
+        </div>
+
+        <div id="div_id_grossMonthlyIncome" class="form-group">
+          <label for="id_grossMonthlyIncome" class="requiredField">
+            <strong class="tagz">Gross Monthly Income:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="grossMonthlyIncome" {% if individual.grossMonthlyIncome %}
+              value="{{ individual.grossMonthlyIncome }}" {% endif %} maxlength="60"
+              class="textinput textInput form-control" required id="id_grossMonthlyIncome" />
+          </div>
+        </div>
+        <div id="div_id_otherSourceOfIncome" class="form-group">
+          <label for="id_otherSourceOfIncome" class="requiredField">
+            <strong class="tagz">Other Source Of Income:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="otherSourceOfIncome" {% if individual.otherSourceOfIncome %}
+              value="{{ individual.otherSourceOfIncome }}" {% endif %} maxlength="60"
+              class="textinput textInput form-control" required id="id_otherSourceOfIncome" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row pt-3">
+      <div class="col-md-4"></div>
+
+      <div class="col-md-4">
+        <input class="btn btn-block btn-primary btn-outline-warning" type="submit" value="Apply" />
+      </div>
+
+      <div class="col-md-4"></div>
+    </div>
+  </form>
+  <div class="card-footer text-center">
+    <p class="text-center">
+      Please Read And Understand Our
+      <a href="https://www.bancabc.co.zw/terms_of_use">Terms And Conditions</a>
+    </p>
+  </div>
+</div>
+{% endblock main %}

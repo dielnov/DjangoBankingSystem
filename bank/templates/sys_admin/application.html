@@ -1,0 +1,133 @@
+{% extends "sys_admin/base.html" %} {% load static %} {% block main %}
+<div class="container">
+    <br>
+    <ol class="breadcrumb mb-4 mt-2">
+        <li class="breadcrumb-item active">Loan Application Of</li>
+    </ol>
+    <div class="row">
+        <div class="col-md-3">
+            <strong>Name: </strong>
+            <br>
+            <span>{{ info.title }} {{ info.firstName }} {{ info.middleName }} {{ info.lastName }}</span>
+        </div>
+        <div class="col-md-3">
+            <strong>Loan Type: </strong>
+            <br>
+            <span>{{ detail.acctype }} </span>
+        </div>
+        <div class="col-md-3">
+            <strong>Loan Reference#: </strong>
+            <br>
+            <span>{{ loan.reference }} </span>
+        </div>
+        <div class="col-md-3">
+            <strong>Loan Status: </strong>
+            <br> {% if not loan.pending %} {% if not loan.approval %}
+            <span>Status: <strong style="color: red">Declined!</strong></span> {% endif %} {% if loan.approval %}
+            <span>Status: <strong style="color: green">Approved!</strong></span> {% endif %} {% else %}
+            <span>Status: <strong style="color: grey">Pending!</strong></span> {% endif %}
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-3">
+            <strong>National ID: </strong>
+            <br>
+            <span>{{ info.nationalID }}</span>
+        </div>
+        <div class="col-md-3">
+            <strong>Passport Photo: </strong>
+            <br>
+            <span><a class="btn btn-sm btn-primary btn-block btn-outline-warning" href="{{ info.passportPhoto.url }}">View</a></span>
+        </div>
+        <div class="col-md-3">
+            <strong>Nationality: </strong>
+            <br>
+            <span>{{ info.Nationality }}</span>
+        </div>
+        <div class="col-md-3">
+            <strong>Passport Number: </strong>
+            <br>
+            <span>{{ info.passportNum }}</span>
+        </div>
+
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-3">
+            <strong>Monthly Income: </strong>
+            <br>
+            <span>USD ${{ info.grossMonthlyIncome }}</span>
+        </div>
+        <div class="col-md-3">
+            <strong>Source Of Income: </strong>
+            <br>
+            <span>{{ info.sourceOfIncome }} </span>
+        </div>
+        <div class="col-md-3">
+            <strong>Work Designation: </strong>
+            <br>
+            <span>{{ info.workDesignation }} </span>
+        </div>
+        <div class="col-md-3">
+            <strong>Work Address: </strong>
+            <br>
+            <span>{{ info.workAddress }} </span>
+
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-3">
+            <strong>Work Contact: </strong>
+            <br>
+            <span>{{ info.workPhone }}</span>
+        </div>
+        <div class="col-md-3">
+            <strong>Other Source Of Income: </strong>
+            <br>
+            <span>{{ info.otherSourceOfIncome }} </span>
+        </div>
+        <div class="col-md-3">
+            <strong>Next Of Kin Name: </strong>
+            <br>
+            <span>{{ info.kin_fname }} {{ info.kin_sname }}</span>
+        </div>
+        <div class="col-md-3">
+            <strong>Next Of Kin Contact: </strong>
+            <br>
+            <span>{{ info.kin_phone }}/{{ info.kin_address }}</span>
+        </div>
+
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-3">
+            <strong>Payslip/Affidavit: </strong>
+            <br>
+            <span><a class="btn btn-sm btn-primary btn-block btn-outline-warning" href="{{ loan.payslip.url }}">View</a></span>
+        </div>
+        <div class="col-md-3">
+            <strong>Proof Of Employment: </strong>
+            <br>
+            <span><a class="btn btn-sm btn-primary btn-block btn-outline-warning"
+                    href="{{ loan.proofOfEmployment.url }}">View</a></span>
+        </div>
+        <div class="col-md-3">
+            <strong>Proof Of Residence: </strong>
+            <br>
+            <span><a class="btn btn-sm btn-primary btn-block btn-outline-warning"
+                    href="{{ loan.proofOfResidence.url }}">View</a></span>
+        </div>
+        <div class="col-md-3">
+            <strong>Copy Of ID: </strong>
+            <br>
+            <span><a class="btn btn-sm btn-primary btn-block btn-outline-warning"
+                    href="{{ loan.copyOfID.url }}">View</a></span>
+        </div>
+    </div>
+    <hr>
+    <div class="card-footer">
+        <p><a style="color: white;" class="btn btn-sm btn-primary btn-outline-success" href="{% url 'bank:approve' loan.pk %}">Approve</a> <a style="color: white;" class="btn btn-sm btn-primary btn-outline-danger" href="{% url 'bank:decline' loan.pk %}">Decline</a>
+        </p>
+    </div>
+
+</div>
+{% endblock main %}

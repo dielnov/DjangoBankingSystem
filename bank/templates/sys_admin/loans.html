@@ -1,0 +1,36 @@
+{% extends "sys_admin/base.html" %} {% load static %} {% block main %}
+<ol class="breadcrumb mb-4 mt-2">
+    <li class="breadcrumb-item active">List Of Loan Applications</li>
+</ol>
+
+
+{% for new_loan in new_loans %}
+<div style="background: rgba(95, 118, 160, 0.336);" class="card pl-3 pt-3">
+    <p>
+        <strong>{{new_loan.account}} |</strong>
+        <a href="{% url 'bank:view_application' new_loan.reference %}"><strong>Application</strong></a> on <span style="font-size: small;" class="mr-auto text-right"><strong>{{new_loan.applicationDate}}</strong></span>
+        <span>Reference#: <strong>{{new_loan.reference}}</strong></span> {% if not new_loan.pending %} {% if not new_loan.approval %}
+        <span>Status: <strong style="color: red">Declined!</strong></span> {% endif %} {% if new_loan.approval %}
+        <span>Status: <strong style="color: green">Approved!</strong></span> {% endif %} {% else %}
+        <span>Status: <strong style="color: grey">Pending!</strong></span> {% endif %}
+    </p>
+</div>
+<div class="card-footer">
+    <p><a style="color: white;" class="btn btn-sm btn-primary btn-outline-success" href="{% url 'bank:approve' new_loan.pk %}">Approve</a> <a style="color: white;" class="btn btn-sm btn-primary btn-outline-danger" href="{% url 'bank:decline' new_loan.pk %}">Decline</a></p>
+</div>
+<br> {% endfor %}
+<hr style="background: gold;"> {% for viewed_loan in viewed_loans %}
+<div style="" class="card pl-3 pt-3">
+    <p>
+        <strong>{{viewed_loan.account}} |</strong>
+        <a href="{% url 'bank:view_application' viewed_loan.reference %}"><strong>Application</strong></a> on <span style="font-size: small;" class="mr-auto text-right"><strong>{{viewed_loan.applicationDate}}</strong></span>
+        <span>Reference#: <strong>{{viewed_loan.reference}}</strong></span> {% if not viewed_loan.pending %} {% if not viewed_loan.approval %}
+        <span>Status: <strong style="color: red">Declined!</strong></span> {% endif %} {% if viewed_loan.approval %}
+        <span>Status: <strong style="color: green">Approved!</strong></span> {% endif %} {% else %}
+        <span>Status: <strong style="color: grey">Pending!</strong></span> {% endif %}
+    </p>
+</div>
+<div class="card-footer">
+    <p><a style="color: white;" class="btn btn-sm btn-primary btn-outline-success" href="{% url 'bank:approve' viewed_loan.pk %}">Approve</a> <a style="color: white;" class="btn btn-sm btn-primary btn-outline-danger" href="{% url 'bank:decline' viewed_loan.pk %}">Decline</a></p>
+</div>
+<br> {% endfor %} {% endblock main %}

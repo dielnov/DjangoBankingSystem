@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="{% static 'bank/images/icons/favicon_yellow.png' %}" type="image/x-icon">
+    <title> {% block page_title %}{% endblock page_title %} </title>
+
+
+    {% block links %}{% endblock links %}
+    <link rel="stylesheet" href="{% static 'bank/base.css' %}" />
+    <link rel="stylesheet" href="{% static 'bootstrap441/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'fontawesome513/css/all.css' %}" />
+
+</head>
+
+<body>
+
+    {% block style %} {% endblock style %}
+    <!-- sidebar -->
+    <nav class="pavbar">
+        <ul class="pavbar-pav">
+            <li class="mylogo">
+                <a style="text-decoration: none!important;" href="{% url 'bank:account' %}" class="pav-link-mylogo">
+                    <span class="asth mylogo-text ">BankABC</span>
+                </a>
+            </li>
+
+            {% if request.user.is_superuser %}
+            <li class="pav-item">
+                <a href="{% url 'bank:dashboard' %}" class="pav-link">
+                    <i class="fas fa-user-shield"></i>
+                    <span class="link-text">Admin Panel</span>
+                </a>
+            </li>
+            {% endif %}
+            <li class="pav-item">
+                <a href="{% url 'bank:account' %}" class="pav-link">
+                    <i aria-hidden="true" class="fas fa-money-check-alt fa-primary fa-secondary">
+                  </i>
+                    <span class="link-text">Account</span>
+                </a>
+            </li>
+
+            <li class="pav-item">
+                <a href="{% url 'bank:fundsTransfer' %}" class="pav-link">
+                    <i aria-hidden="true" class="fas fa-exchange-alt fa-primary fa-secondary"></i>
+                    <span class="link-text">Transfers</span>
+                </a>
+            </li>
+            <li class="pav-item">
+                <a href="{% url 'bank:statement' %}" class="pav-link">
+                    <i aria-hidden="true" class="fas fa-receipt fa-primary fa-secondary"></i>
+                    <span class="link-text">Statement</span>
+                </a>
+            </li>
+            <li class="pav-item">
+                {% if user.isCorporate %}
+                <a class="pav-link" href="{% url 'bank:corporate' %}">
+                    <i aria-hidden="true" class="fas fa-money-bill-wave fa-primary fa-secondary"></i>
+                    <span class="link-text">PreLoan</span></a> {% else %}
+                <a class="pav-link" href="{% url 'bank:individual' %}">
+                    <i aria-hidden="true" class="fas fa-money-bill-wave fa-primary fa-secondary"></i>
+                    <span class="link-text">PreLoan</span></a>
+                {% endif %}
+            </li>
+
+            <li class="pav-item">
+                <a href="{% url 'bank:catalog' %}" class="pav-link">
+                    <i aria-hidden="true" class="fas fa-align-left fa-primary fa-secondary">
+          </i>
+                    <span class="link-text">Navigator Tool</span>
+                </a>
+            </li>
+            <li class="pav-item">
+                <a href="{% url 'bank:application' %}" class="pav-link">
+                    <i class="far fa-file-pdf"></i>
+                    <span class="link-text">Financing Application</span>
+                </a>
+            </li>
+            <li class="pav-item">
+                <a href="{% url 'bank:logout' %}" class="pav-link">
+                    <i aria-hidden="true" class="fas fa-sign-out-alt fa-primary fa-secondary"></i>
+                    <span class="link-text">logout</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- NavHead   sticky-top-->
+    <div class="head">
+        <nav class="navbar navbar-expand-sm">
+            <!-- Brand -->
+            <a style="text-decoration: none!important;" class="navbar-brand" href="{% url 'bank:account' %}">
+                <span class="asth ">BankABC</span>
+            </a>
+
+            <ul class="navbar-nav ml-auto">
+                <!-- Dropdown -->
+                <li class="nav-item dropdown mr-auto">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            {{ request.user.username }}
+          </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="{% url 'bank:account' %}">Account</a> {% if user.isCorporate %}
+                        <a class="dropdown-item" href="{% url 'bank:corporate' %}">PreLoan</a> {% else %}
+                        <a class="dropdown-item" href="{% url 'bank:individual' %}">PreLoan</a> {% endif %}
+                        <a class="dropdown-item" href="{% url 'bank:logout' %}">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <main class="">
+        {% block main %} {% endblock main %}
+    </main>
+    <script rel="stylesheet" src="{% static 'bootstrap441/js/jquery-3.4.1.js' %}" />
+    </script>
+    <script rel="stylesheet" src="{% static 'bootstrap441/js/popper.js' %}" />
+    </script>
+    <script rel="stylesheet" src="{% static 'bootstrap441/js/bootstrap.min.js' %}" />
+    </script>
+</body>
+
+</html>

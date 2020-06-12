@@ -1,0 +1,37 @@
+{% extends "loans/base.html" %}
+{% load static %}
+{% block page_title %}Agreement{% endblock page_title %}
+
+
+{% block inCol9 %}
+<div class="text-center">
+    <h3><strong>Agreement Of Claim</strong></h3>
+    <br>
+</div>
+<div class="card">
+    <div class="p-5 text-center">
+        <p>
+            This Agreement of Claim on <strong>{{ product.productName }} {{ product.productbrand }}
+                {{ product.productModel }}</strong> from <strong>{{ product.account.username }}</strong>
+            is valid for 31 days from <strong>{{ today }}</strong> to <strong>{{ expiryDate }}</strong>
+            after which this claim will be null and void. Henceforth, it will be up to
+            <strong>{{ product.account.username }}</strong>
+            to either uphold this agreement with you or cancelling it, thereby puting <strong>{{ product.productName }}
+                {{ product.productbrand }}
+                {{ product.productModel }}</strong>
+            back on the Catalog available to other buyers.
+        </p>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="text-center">
+            <input required type="checkbox" name="" id="">
+            <label for="">Tick If You Agree To These Terms And Conditions</label>
+        </div>
+        <div class="card-footer text-right">
+            <input type="submit" value="Accept Agreement" class="btn btn-outline-primary btn-sm">
+        </div>
+
+    </form>
+</div>
+{% endblock inCol9 %}

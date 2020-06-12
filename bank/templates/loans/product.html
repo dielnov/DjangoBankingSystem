@@ -1,0 +1,63 @@
+{% extends "loans/base.html" %}
+{% load static %}
+{% block page_title %}Product View{% endblock page_title %}
+
+
+
+{% block inCol9 %}
+<div class="card border-info">
+
+    <div style="border-bottom: 6px double lightgrey;" class="card-header text-center">
+
+        <p>
+            <a style="text-decoration: none;" href="{% url 'bank:product' product.pk %}">
+
+                <span style="color: dimgrey;font-size: small;">Price : </span><strong>
+                    ${{product.price}}
+                </strong>
+                <span style="color: dimgrey;font-size: small;">Brand :
+                </span><strong>{{product.productbrand|upper}}</strong>
+                <span style="color: dimgrey;font-size: small;">Model :
+                </span><strong>{{product.productModel|upper}}</strong>
+            </a>
+        </p>
+    </div>
+    <div class="card-body text-center row">
+        {% for photo in photos %}
+        {% if photo %}
+        <div {% if photos|length == 1 %}class="col" {% elif photos|length == 2 %} class="col-sm-6"
+            {% elif photos|length == 3 %} class="col-sm-4" {% else %} class="col-sm-3" {% endif %}>
+
+            <div class="card-body img-fluid">
+                <img class="img-box rounded-lg" src="{{ photo.url }}" alt="{{photo}}" height="150" width="150">
+            </div>
+        </div>
+
+        {% endif %}
+        {% endfor %}
+    </div>
+    <div style="border-top: 6px double lightgrey;border-bottom: 1px solid skyblue;border-bottom-right-radius: 5px;border-bottom-left-radius: 5px;"
+        class="card-footer text-center">
+        <p class="">
+            <span style="color: dimgrey;font-size: small;">Location : </span><strong
+                style="color: dodgerblue;">{{product.location}}</strong>
+            <a style="text-decoration: none;" href="">
+
+                <span style="color: dimgrey;font-size: small;">Dealer :
+                </span><strong>{{product.account.username}}</strong>
+            </a>
+        </p>
+    </div>
+    <div class="ml-4 mr-4">
+        <p class="text-center">
+            {{ product.description|safe }}
+        </p>
+    </div>
+
+    <hr class="m-1">
+    <a href="{% url 'bank:agreement' product.pk %}" class="btn btn-block btn-outline-primary btn-sm">claim</a>
+</div>
+
+
+
+{% endblock inCol9 %}

@@ -1,0 +1,44 @@
+{% extends "bank/base.html" %}{% load static %}
+<!-- ############################################################################### -->
+{% block title %} Bank Statement {% endblock title %}
+<!-- ############################################################################### -->
+{% block links %}
+<link rel="stylesheet" href="{% static 'resp_table/css/main.css' %}" />
+{% endblock links %}
+<!-- ############################################################################ -->
+{% block main %}
+<!-- responsive table -->
+<div class="holder">
+  <div class="responsiveTbl">
+    <table class="">
+      <thead class="">
+        <tr>
+          <th>Transaction #ID</th>
+          <th>Date</th>
+          <th>Sender</th>
+          <th>Receiver</th>
+          <th>Amount $USD</th>
+          <th>Balance $USD</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for transaction in transactions %}
+        <tr>
+          <td>{{transaction.0 }}</td>
+          <td>{{ transaction.1 }}</td>
+          <td>{{ transaction.2 }}</td>
+          <td>{{ transaction.3 }}</td>
+          <td>
+            <span class="price">
+              {{ details.currency }} {{ transaction.4 }}
+            </span>
+          </td>
+          <td>{{ details.currency }}{{ transaction.5 }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock main %}

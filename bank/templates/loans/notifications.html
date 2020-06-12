@@ -1,0 +1,39 @@
+{% extends "loans/base.html" %}
+{% load static %}
+{% block page_title %}Catalog{% endblock page_title %}
+
+
+
+{% block inCol9 %}
+<br>
+{% for new_notification in new_notifications %}
+<div style="background: rgba(95, 118, 160, 0.336);" class="card pl-3 pt-3">
+    <p>
+        Your<strong>({{new_notification.tag}}) :</strong> <a href=""><strong>{{new_notification.productbrand}}
+                {{new_notification.productModel}}</strong></a>
+        was claimed by <a href=""><strong>{{new_notification.claimer}}</strong></a>
+        on <span style="font-size: small;"
+            class="mr-auto text-right"><strong>{{new_notification.claim_date}}</strong></span>
+        expires on <span style="font-size: small;"
+            class="mr-auto text-right"><strong>{{new_notification.claim_exp_date}}</strong></span>
+    </p>
+</div>
+<br>
+{% endfor %}
+<hr style="background: gold;">
+{% for viewed_notification in viewed_notifications %}
+<div class="card pl-3 pt-3">
+    <p>
+        Your<strong>({{viewed_notification.tag}}) :</strong> <a href=""><strong>{{viewed_notification.productbrand}}
+                {{viewed_notification.productModel}}</strong></a>
+        was claimed by <a href=""><strong>{{viewed_notification.claimer}}</strong></a>
+        on <span style="font-size: small;"
+            class="mr-auto text-right"><strong>{{viewed_notification.claim_date}}</strong></span>
+        expires on <span style="font-size: small;"
+            class="mr-auto text-right"><strong>{{viewed_notification.claim_exp_date}}</strong></span>
+    </p>
+</div>
+<br>
+{% endfor %}
+
+{% endblock inCol9 %}

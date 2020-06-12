@@ -1,0 +1,225 @@
+{% extends "loans/base.html" %} {% load static %}
+<!-- fghj -->
+{% block page_title %}Post Product{% endblock page_title %}
+<!-- adsfdgfh -->
+{% block inCol9 %}
+<form enctype="multipart/form-data" method="POST">
+  {% csrf_token %}
+  <select hidden name="account" class="select form-control" required id="id_account">
+    <option value="{{ request.user.id }}" selected="selected">
+      {{ request.user }}
+    </option>
+  </select>
+  <div class="form-group">
+    <div class="card-header text-center">
+      <ul class="navbar-nav">
+        <li class="dropdown">
+          <a class="dropdown-toggle btn btn-sm btn-primary" href="#" id="navbardrop" data-toggle="dropdown">
+            <strong>add product pictures:</strong>
+          </a>
+          <div style="opacity: 0.85;" class="dropdown-menu dropdown-menu-left bg-light btn-outline-warning">
+            <div class="dropdown-item">
+              <label for="">
+                image 1
+                <strong>(required)</strong>
+                :
+              </label>
+              <input onchange="previewImage1(event)" type="file" name="image1" accept="image/*" required
+                id="id_image1" />
+            </div>
+            <div class="dropdown-item">
+              <label for="">
+                image 2
+                <strong>(optional)</strong>
+                :
+              </label>
+              <input onchange="previewImage2(event)" type="file" name="image2" accept="image/*" id="id_image2" />
+            </div>
+            <div class="dropdown-item">
+              <label for="">
+                image 3
+                <strong>(optional)</strong>
+                :
+              </label>
+              <input onchange="previewImage3(event)" type="file" name="image3" accept="image/*" id="id_image3" />
+            </div>
+            <div class="dropdown-item">
+              <label for="">
+                image 4
+                <strong>(optional)</strong>
+                :
+              </label>
+              <input onchange="previewImage4(event)" type="file" name="image4" accept="image/*" id="id_image4" />
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="row text-center">
+
+      <div style="display: none;" id="div_image1" class="col-sm-6 col-md-3">
+        <div class="card-body img-fluid">
+          <img id="image1" class="img-box rounded-lg" src="images/audi.jpg" alt="audi" height="150" width="150" />
+        </div>
+      </div>
+
+      <div style="display: none;" id="div_image2" class="col-sm-6 col-md-3">
+        <div class="card-body img-fluid">
+          <img id="image2" class="img-box rounded-lg" src="images/audi.jpg" alt="audi" height="150" width="150" />
+        </div>
+      </div>
+
+      <div style="display: none;" id="div_image3" class="col-sm-6 col-md-3">
+        <div class="card-body img-fluid">
+          <img id="image3" class="img-box rounded-lg" src="images/audi.jpg" alt="audi" height="150" width="150" />
+        </div>
+      </div>
+
+      <div style="display: none;" id="div_image4" class="col-sm-6 col-md-3">
+        <div class="card-body img-fluid">
+          <img id="image4" class="img-box rounded-lg" src="images/audi.jpg" alt="audi" height="150" width="150" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="container pt-3">
+      <div class="row">
+
+
+
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <div class="form-group text-center">
+            <label>
+              <strong>About The Product(Description)</strong>
+            </label>
+            <br>
+            {{form.description|safe}}
+            {{form.media}}
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <div>
+              <label for=""><span>product:</span></label>
+              <input class="form-control" type="text" maxlength="30" required name="productName" id="id_productName" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div>
+              <label for=""><span>brand:</span></label>
+              <input class="form-control" type="text" name="productbrand" maxlength="30" required
+                id="id_productbrand" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div>
+              <label for=""><span>model:</span></label>
+              <input class="form-control" type="text" name="productModel" maxlength="30" required
+                id="id_productModel" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div>
+              <label for=""><span>price:</span></label>
+              <input class="form-control" type="text" required name="price" id="id_price" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div>
+              <label for=""><span>location:</span></label>
+              <input class="form-control" type="text" required name="location" id="id_location" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div>
+              <label for=""><span>tag:</span></label>
+              <select required class="form-control" name="tag" id="id_tag">
+                <option value="">--------</option>
+                <option value="Auto">Auto</option>
+                <option value="Housing">Housing</option>
+                <option value="Personal">Personal</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="card-footer">
+      <div class="row">
+        <input type="submit" value="post" class="btn btn-block btn-sm btn-primary" />
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    function previewImage1(event) {
+      var reader = new FileReader();
+      var imageField = document.getElementById("image1");
+      var imageDiv = document.getElementById("div_image1")
+
+      reader.onload = function () {
+        if (reader.readyState == 2) {
+          imageDiv.style.display = "block";
+          imageField.src = reader.result;
+        }
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+    function previewImage2(event) {
+      var reader = new FileReader();
+      var imageField = document.getElementById("image2");
+      var imageDiv2 = document.getElementById("div_image2")
+
+      reader.onload = function () {
+        if (reader.readyState == 2) {
+          imageDiv2.style.display = "block";
+          imageField.src = reader.result;
+        }
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+    function previewImage3(event) {
+      var reader = new FileReader();
+      var imageField = document.getElementById("image3");
+      var imageDiv3 = document.getElementById("div_image3")
+
+      reader.onload = function () {
+        if (reader.readyState == 2) {
+          imageDiv3.style.display = "block";
+          imageField.src = reader.result;
+        }
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+    function previewImage4(event) {
+      var reader = new FileReader();
+      var imageField = document.getElementById("image4");
+      var imageDiv4 = document.getElementById("div_image4")
+
+      reader.onload = function () {
+
+        if (reader.readyState == 2) {
+          imageDiv4.style.display = "block";
+          imageField.src = reader.result;
+        }
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+  </script>
+</form>
+{% endblock inCol9 %}

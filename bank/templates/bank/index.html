@@ -1,0 +1,521 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes"/>
+    <link rel="shortcut icon" type="ico" href="{% static 'bank/images/favicon.ico' %}"/>
+    <title>BancABC Zimbabwe - The #ATeam</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="{% static 'bank/fonts/icomoon/style.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'bank/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'bank/css/jquery-ui.css' %}" />
+    <link rel="stylesheet" href="{% static 'bank/css/owl.carousel.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'bank/css/owl.theme.default.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'bank/css/owl.theme.default.min.css' %}"/>
+
+    <link
+      rel="stylesheet"
+      href="{% static 'bank/css/jquery.fancybox.min.css' %}"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{% static 'bank/css/bootstrap-datepicker.css' %}"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{% static 'bank/fonts/flaticon/font/flaticon.css' %}"
+    />
+
+    <link rel="stylesheet" href="{% static 'bank/css/aos.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'bank/css/style.css' %}" />
+  </head>
+
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+    <div id="overlayer"></div>
+    <div class="loader">
+      <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+
+    <div class="site-wrap">
+      <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+          <div class="site-mobile-menu-close mt-3">
+            <span class="icon-close2 js-menu-toggle"></span>
+          </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+      </div>
+
+      <header class="site-navbar js-sticky-header site-navbar-target" role="banner" >
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-6 col-xl-2">
+              <h1 class="mb-0 site-logo">
+                <a href="{% url 'bank:index' %}" class="h2 mb-0">
+                  <img
+                    src="{% static 'bank/images/logo.png' %}"
+                    alt=""
+                    class="img-fluid"
+                    height="70"
+                    style="padding-top: 20px;"
+                  />
+                </a>
+              </h1>
+            </div>
+
+            <div class="col-12 col-md-10 d-none d-xl-block">
+              <nav class="site-navigation position-relative text-right" role="navigation">
+                <ul
+                  class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block"
+                >
+                  <li><a href="#home-section" class="nav-link">Home</a></li>
+                  <li class="">
+                    <a href="#about-section" class="nav-link">Our Services</a>
+                  </li>
+                  <li>
+                    <a href="#contact-section" class="nav-link">Talk To Us</a>
+                  </li>
+                  <li class="social">
+                    <a href="https://www.facebook.com/BancabcZW/" class="nav-link">
+                    <span class="icon-facebook"></span>
+                    </a>
+                  </li>
+                  <li class="social">
+                    <a href="https://twitter.com/BancabcZW" class="nav-link">
+                    <span class="icon-twitter"></span>
+                    </a>
+                  </li>
+                  <li class="social">
+                  <a href="https://www.instagram.com/bancabczw/" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
+                  </li>
+                  <li class="social">
+                    <a href="https://www.linkedin.com/company/bancabczim/" class="nav-link">
+                    <span class="icon-linkedin"></span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+
+            <div
+              class="col-6 d-inline-block d-xl-none ml-md-0 py-3"
+              style="position: relative; top: 3px;"
+            >
+              <a href="#" class="site-menu-toggle js-menu-toggle float-right"
+                ><span class="icon-menu h3"></span
+              ></a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div
+        class="site-blocks-cover overlay"
+        style="background-image: url(/static/bank/images/login_bg.png);"
+        data-aos="fade"
+        id="home-section"
+      >
+        <div class="container">
+        <br>
+          <div class="row align-items-center justify-content-center">
+            <div class="col-md-10 mt-lg-5 text-center">
+              <div class="single-text owl-carousel">
+                <div class="slide">
+                  <h1 class="text-uppercase" data-aos="fade-up">
+                    Online Loan Application
+                  </h1>
+                  <p class="mb-5 desc" data-aos="fade-up" data-aos-delay="100">
+                    Apply for a BancABC loan anywhere on the go, with our new Online Loan Application Platform.
+                  </p>
+                  <div data-aos="fade-up" data-aos-delay="100">
+                    <a
+                      href="{% url 'bank:login' %}"
+                      class="btn btn-primary mr-2 mb-2"
+                      >Open Loan Portal</a
+                    >
+                  </div>
+                </div>
+
+                <div class="slide">
+                  <h1 class="text-uppercase" data-aos="fade-up">
+                    Loan Balance
+                  </h1>
+                  <p class="mb-5 desc" data-aos="fade-up" data-aos-delay="100">
+                    Inquire and check your Loan balance from anywhere using the new online loans platform. Keep track of your loan balance without visiting our offices.
+                  </p>
+                  <div data-aos="fade-up" data-aos-delay="100">
+                    <a
+                      href="{% url 'bank:login' %}"
+                      class="btn btn-primary mr-2 mb-2"
+                      >Open Loan Portal</a
+                    >
+                  </div>
+                </div>
+
+                <div class="slide">
+                  <h1 class="text-uppercase" data-aos="fade-up">
+                    Multiple Loan Types
+                  </h1>
+                  <p class="mb-5 desc" data-aos="fade-up" data-aos-delay="100">
+                   Either Motor Vehicle Loan, Personal Loan or Housing Loan, apply for them all on
+                   our online platform.
+                  </p>
+                  <div data-aos="fade-up" data-aos-delay="100">
+                    <a
+                      href="{% url 'bank:login' %}"
+                      class="btn btn-primary mr-2 mb-2"
+                      >Open Loan Portal</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="#next" class="mouse smoothscroll">
+          <span class="mouse-icon">
+            <span class="mouse-wheel"></span>
+          </span>
+        </a>
+      </div>
+
+      <section
+        class="site-section bg-light"
+        id="about-section"
+        data-aos="fade"
+      >
+        <div class="container">
+          <div class="row site-section" id="faq-section">
+            <div class="col-12 text-center" data-aos="fade">
+              <h2 class="section-title">Our Products & Services</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="mb-5" data-aos="fade-up" data-aos-delay="100">
+                <h2 class="text-black h4 mb-4">
+                  <strong>Motor Vehicle Loans</strong>
+                </h2>
+                <p>
+                  A  Vehicle loan is an automobile financing to enable the customer to purchase brand new or second hand vehicles.NOTE: WE DO NOT FINANCE GREY IMPORT SECOND HAND VEHICLES, ( e.g. Japan and Singapore).
+
+                </p>
+              </div>
+
+              <div class="mb-5" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-black h4 mb-4">
+                  <strong>Personal Loans</strong>
+                </h3>
+                <p>
+                  A personal loan is an advance extended to customers who maintain current accounts with BancABC and has proof of consistent income. It is based on the borrower’s credit rating and has a variable interest rate over a fixed term. The capital as well as interest is repaid monthly from the customer’s current / savings account over the agreed period.
+                </p>
+              </div>
+
+              <div class="mb-5" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-black h4 mb-4">
+                  <strong>Civil Servant Loans</strong>
+                </h3>
+                <p>
+                  Special Civil Servant loans are accessible from the loan portal. Create your loan portal, and apply for a 
+                  Civil Servant Loan by submiting your payslip and other required documents. Once the documents are processed 
+                  your loan will be granted and you will be notified through your portal.
+                </p>
+              </div>
+
+              <div class="mb-5" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-black h4 mb-4">
+                  <strong>Mortgage</strong>
+                </h3>
+                <p>
+                  A loan offered to customers to purchase for residential purpose.The Loan term is selected by the customer (minimum repayment term being 7 years and maximum being 20 years). The monthly installment is deducted directly from the current account or by direct debit from another bank.
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="mb-5" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-black h4 mb-4">The Loan Portal?</h3>
+                <p>
+                 The Loan Portal is a BancABC platform to allow clients around the nations to apply for loans without hustle.
+                 It removes the need to unnecessarily move around to and fro BancABC offices just to apply for a loan and submit documents.
+                 With the Loan Portal clients can simply apply for their desired loans in the comfort of their homes, work place or on the go anywher ein the world.
+                 Loan Application Has never Been this Easy!
+                </p>
+              </div>
+
+              <div class="mb-5" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-black h4 mb-4">Verified Dealers</h3>
+                <p>
+                  For Motor Vehicle and Housing Loans, the Loan Portal provides acccess to vehicles and houses on sale from
+                  truested dealers verified by the bank. Their products are evaluated by the bank and as such, you can easily
+                  purchase them with your loan on the site.
+                </p>
+              </div>
+
+              <div class="mb-5" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-black h4 mb-4">
+                  Loan Tracker
+                </h3>
+                <p>
+                  Keep track of your loan application progress from the moment of application. With the Loan portal, you can 
+                  also keep track of your loan balance.
+                </p>
+              </div>
+
+              <div class="mb-5" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-black h4 mb-4">
+                  Live Rates
+                </h3>
+                <p>
+                  The Loan Portal keeps a live update of the prevailing interest rates as well as exchange rates. 
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="site-section bg-light"
+        id="contact-section"
+        data-aos="fade"
+      >
+        <div class="container">
+          <div class="row mb-0">
+            <div class="col-12 text-center">
+              <h2 class="section-title mb-1">Contact Us</h2>
+            </div>
+          </div>
+
+          <div class="row mb-0">
+            <div class="col text-center">
+              <p class="mb-1">
+              <h3>Branch Locator</h3>
+                <span class="icon-room d-block h2 text-primary"></span>
+                <select id="branch"onChange="classChange(document.getElementById('branch').value)" class="form-control" name="menu-514" aria-invalid="false">
+                    <option value="">Select Branch</option>
+                    <option value="popmake-3927">ABC Asset Management</option>
+                    <option value="popmake-3948">ABC Stockbrokers</option>
+                    <option value="popmake-3946">BancABC Head Office</option>
+                    <option value="popmake-3947">Beitbridge Branch</option>
+                    <option value="popmake-3949">Bindura Branch</option>
+                    <option value="popmake-3950">Chinhoyi Branch</option>
+                    <option value="popmake-3951">Chiredzi Branch</option>
+                    <option value="popmake-3952">Gweru Branch</option>
+                    <option value="popmake-3953">Heritage Branch</option>
+                    <option value="popmake-3954">Hwange Branch</option>
+                    <option value="popmake-3955">Jason Moyo Branch</option>
+                    <option value="popmake-3974">Kwekwe Branch</option>
+                    <option value="popmake-3976">Masvingo</option>
+                    <option value="popmake-3998">Mount Pleasant Branch</option>
+                    <option value="popmake-3996">Msasa Branch</option>
+                    <option value="popmake-3980">Mutare Branch</option>
+                    <option value="popmake-3981">Ngezi Branch</option>
+                    <option value="popmake-3984">Southerton Branch</option>
+                    <option value="popmake-3989">Triangle Branch</option>
+                    <option value="popmake-3992">Victoria Falls Branch</option>
+                    <option value="popmake-3994">Zvishavane Branch</option>
+                </select>
+                <script>
+                    function classChange(x){
+                        
+                        document.querySelector("#btnn").setAttribute("class", x);
+                    }
+                    
+                </script>
+              </p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 mb-5">
+              <form action="#" class="p-1 bg-white">
+                <h2 class="h4 text-black mb-0">Contact Form</h2>
+
+                <div class="row form-group">
+                  <div class="col-md-6 mb-3 mb-md-0">
+                    <label class="text-black" for="fname">First Name</label>
+                    <input type="text" id="fname" class="form-control" />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="text-black" for="lname">Last Name</label>
+                    <input type="text" id="lname" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-md-12">
+                    <label class="text-black" for="email">Email</label>
+                    <input type="email" id="email" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-md-12">
+                    <label class="text-black" for="subject">Subject</label>
+                    <input type="subject" id="subject" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-md-12">
+                    <label class="text-black" for="message">Message</label>
+                    <textarea
+                      name="message"
+                      id="message"
+                      cols="30"
+                      rows="3"
+                      class="form-control"
+                      placeholder="Write your notes or questions here..."
+                    ></textarea>
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-md-12">
+                    <input
+                      type="submit"
+                      value="Send Message"
+                      class="btn btn-primary btn-md text-white"
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9">
+              <div class="row">
+                <div class="col-md-5">
+                  <h2 class="footer-heading mb-4">About Us</h2>
+                  <p>
+                    ABC Holdings Limited is the parent company of a number of
+                    sub-Saharan Africa banks operating under the BancABC brand
+                    that offer a diverse range of financial services including
+                    personal, business and corporate banking as well as asset
+                    management, stockbroking and treasury services...
+                  </p>
+                </div>
+                <div class="col-md-3 ml-auto">
+                  <h2 class="footer-heading mb-4">Quick Links</h2>
+                  <ul class="list-unstyled">
+                    <li>
+                      <a href="#about-section" class="smoothscroll">Terms</a>
+                    </li>
+                    <li>
+                      <a href="#about-section" class="smoothscroll">Policy</a>
+                    </li>
+                    <li>
+                      <a href="#about-section" class="smoothscroll">About Us</a>
+                    </li>
+                    <li>
+                      <a href="#services-section" class="smoothscroll"
+                        >Services</a
+                      >
+                    </li>
+                    <li>
+                      <a href="#testimonials-section" class="smoothscroll"
+                        >Testimonials</a
+                      >
+                    </li>
+                    <li>
+                      <a href="#contact-section" class="smoothscroll"
+                        >Contact Us</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-3 footer-social">
+                  <h2 class="footer-heading mb-4">Follow Us</h2>
+                  
+                    <a href="https://www.facebook.com/BancabcZW/" class="nav-link">
+                    <span class="icon-facebook"></span>
+                    </a>
+                  
+                    <a href="https://twitter.com/BancabcZW" class="nav-link">
+                    <span class="icon-twitter"></span>
+                    </a>
+                  
+                  <a href="https://www.instagram.com/bancabczw/" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
+                  
+                    <a href="https://www.linkedin.com/company/bancabczim/" class="nav-link">
+                    <span class="icon-linkedin"></span>
+                    </a>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <h2 class="footer-heading mb-4">Subscribe Newsletter</h2>
+              <form action="#" method="post" class="footer-subscribe">
+                <div class="input-group mb-3">
+                  <input
+                    type="text"
+                    class="form-control border-secondary text-white bg-transparent"
+                    placeholder="Enter Email"
+                    aria-label="Enter Email"
+                    aria-describedby="button-addon2"
+                  />
+                  <div class="input-group-append">
+                    <button
+                      class="btn btn-primary text-black"
+                      type="button"
+                      id="button-addon2"
+                    >
+                      Send
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="row pt-5 mt-2 text-center">
+            <div class="col-md-12">
+              <div class="border-top pt-2">
+                <p class="text-center footer-text">
+                 
+                  All rights reserved |
+                  Copyright &copy; ChenaiProject
+                   <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!-- .site-wrap -->
+
+    <script src="{% static 'bank/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'bank/js/jquery-ui.js' %}"></script>
+    <script src="{% static 'bank/js/popper.min.js' %}"></script>
+    <script src="{% static 'bank/js/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'bank/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'bank/js/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'bank/js/jquery.easing.1.3.js' %}"></script>
+
+    <script src="{% static 'bank/js/aos.js' %}"></script>
+    <script src="{% static 'bank/js/jquery.fancybox.min.js' %}"></script>
+    <script src="{% static 'bank/js/jquery.sticky.js' %}"></script>
+    <script src="{% static 'bank/js/isotope.pkgd.min.js' %}"></script>
+
+    <script src="{% static 'bank/js/main.js' %}"></script>
+  </body>
+</html>

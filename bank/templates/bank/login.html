@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <link rel="shortcut icon" type="ico" href="{% static 'bank/images/favicon.png' %}">
+    <title>Loan Portal</title>
+
+    <!--===============================================================================================-->
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'bank/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+        href="{% static 'bank/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+        href="{% static 'bank/fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'bank/vendor/animate/animate.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'bank/vendor/css-hamburgers/hamburgers.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'bank/vendor/animsition/css/animsition.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'bank/vendor/select2/select2.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'bank/vendor/daterangepicker/daterangepicker.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'bank/css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bank/css/main.css' %}">
+    <!--===============================================================================================-->
+</head>
+
+<body>
+
+
+
+    <div class="limiter">
+        <div class="container-login100" style="background-image: url(/static/bank/images/login_bg.png);">
+            <div class="wrap-login100 p-t-30 p-b-50">
+                <span class="login100-form-title p-b-41">
+                    Account Login
+                </span>
+                <form class="login100-form validate-form p-b-33 p-t-5" method="post">{% csrf_token %}
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter username">
+                        <input type="email" name="email" id="inputEmail" class="input100" placeholder="Email Address"
+                            required autofocus>
+                        <span class="focus-input100" data-placeholder=""></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <input class="input100" type="password" name="password" id="inputPassword"
+                            placeholder="Password" required>
+                        <span class="focus-input100" data-placeholder="&#xe80f;"></span>
+                    </div>
+
+                    {% for field in login_form %}
+                    <p>
+                        {% for error in field.errors %}
+                        <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+                    </p>
+                    {% endfor %}
+
+                    {% if login_form.non_field_errors %}
+                    <div style="color: red">
+                        <p>{{login_form.non_field_errors}}</p>
+                    </div>
+
+                    {% endif %}
+
+                    <div class='row-space'>
+                        <div class="md-6 container-login100-form-btn m-t-32">
+                            <button class="login100-form-btn">
+                                Login
+                            </button>
+                        </div>
+
+                        <div class="md-6 container-login100-form-btn m-t-32">
+                            <a class='login100-form-btn' href="{% url 'bank:register' %}">Register Here!</a>
+                        </div>
+                    </div>
+
+
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="dropDownSelect1"></div>
+
+    <!--===============================================================================================-->
+    <script src="{% static 'bank/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'bank/vendor/animsition/js/animsition.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'bank/vendor/bootstrap/js/popper.js' %}"></script>
+    <script src="{% static 'bank/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'bank/vendor/select2/select2.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'bank/vendor/daterangepicker/moment.min.js' %}"></script>
+    <script src="{% static 'bank/vendor/daterangepicker/daterangepicker.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'bank/vendor/countdowntime/countdowntime.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'bank/js/main2.js"></script>
+
+</body>
+</html>

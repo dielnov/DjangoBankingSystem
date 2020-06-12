@@ -1,0 +1,63 @@
+{% extends "loans/base.html" %}
+{% load static %}
+{% block page_title %}Product View{% endblock page_title %}
+
+
+
+{% block inCol9 %}
+<div class="card">
+
+    <div class="card-header text-center">
+        <span class="">
+            <a href="">
+                <Strong>{{ product.account.username }}</Strong>
+            </a>
+        </span>
+        <p>
+            <a style="text-decoration: none;" href="{% url 'bank:product' product.pk %}">
+
+                <span style="color: dimgrey;font-size: small;">Price : </span><strong>
+                    ${{product.price}}
+                </strong>
+                <span style="color: dimgrey;font-size: small;">Brand :
+                </span><strong>{{product.productbrand|upper}}</strong>
+                <span style="color: dimgrey;font-size: small;">Model :
+                </span><strong>{{product.productModel|upper}}</strong>
+            </a>
+        </p>
+    </div>
+    <div class="card-body text-center row">
+        {% for photo in photos %}
+        {% if photo %}
+        <div {% if photos|length == 1 %}class="col" {% elif photos|length == 2 %} class="col-sm-6"
+            {% elif photos|length == 3 %} class="col-sm-4" {% else %} class="col-sm-3" {% endif %}>
+
+            <div class="card-body img-fluid">
+                <img class="img-box rounded-lg" src="{{ photo.url }}" alt="{{photo}}" height="150" width="150">
+            </div>
+        </div>
+
+        {% endif %}
+        {% endfor %}
+    </div>
+    <div class="card-footer text-center">
+        <p class="">
+            <span style="color: dimgrey;font-size: small;">Location : </span><strong
+                style="color: dodgerblue;">{{product.location}}</strong>
+            <a style="text-decoration: none;" href="">
+
+                <span style="color: dimgrey;font-size: small;">Dealer :
+                </span><strong>{{product.account.username}}</strong>
+            </a>
+        </p>
+    </div>
+    <p class="text-justify m-3 p-2">
+        {{ product.description|safe }}
+    </p>
+    <hr class="m-1">
+
+</div>
+
+
+
+{% endblock inCol9 %}

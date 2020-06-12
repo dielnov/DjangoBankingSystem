@@ -1,0 +1,127 @@
+{% extends "bank/base.html" %}{% load static %}
+
+<!-- Main Account Block -->
+{% block main %}
+<div class="">
+  <h3
+    class="sticky-top card-header Righteous info-color white-text text-center myCardHead py-4 mb-1"
+  >
+    <strong>BancABC Funds Transfer To:</strong>
+    <br />
+    {% if message == 'Transaction Successful!' %}
+    <p style="color: green;">{{ message }}</p>
+    {% else %}
+    <p style="color: red;">{{ message }}</p>
+    {% endif %}
+  </h3>
+
+  <form class="formclass mt-0" method="post">
+    {% csrf_token %}
+
+    <div class="form-row mb-1">
+      <div class="col-sm">
+        <label for="tradingAs" class="form-text-ds mr-sm-2">
+          Receiver Name:
+        </label>
+        <input
+          type="text"
+          name="tradingAs"
+          id="tradingAs"
+          class="form-control"
+        />
+      </div>
+      <div class="col-sm">
+        <label for="phone" class="form-text-ds mr-sm-2">
+          Phone Number:
+        </label>
+        <input type="text" name="phone" id="phone" class="form-control" />
+      </div>
+    </div>
+
+    <div class="form-row mb-1">
+      <div class="col-sm">
+        <label for="accnum" class="form-text mr-sm-2">
+          Account Number:
+        </label>
+        <input type="text" name="accnum" id="accnum" class="form-control" />
+      </div>
+      <div class="col-sm">
+        <label for="date" class="form-text mr-sm-2">
+          Transaction Date:
+        </label>
+        <input
+          id="date"
+          name="date"
+          class="form-control"
+          type="text"
+          onfocus="(this.type='date')"
+          onblur="(this.type='text')"
+        />
+      </div>
+    </div>
+
+    <div class="form-row mb-1">
+      <div class="col">
+        <select class="form-control" name="receivingBank" id="receivingBank">
+          <option>NMB</option>
+          <option>CBZ</option>
+          <option>CABS</option>
+          <option>Meikles</option>
+          <option>EcoBank</option>
+          <option>BancABC</option>
+          <option>StewardBank</option>
+        </select>
+      </div>
+      <div class="col">
+        <select class="form-control" name="branch" id="branch">
+          <option>Angwa</option>
+          <option>Masasa</option>
+          <option>Eastlea</option>
+          <option>Letombo</option>
+          <option>Westgate</option>
+          <option>Eastagte</option>
+          <option>Mt Hampden</option>
+          <option>Mt Pleasant</option>
+        </select>
+      </div>
+      <div class="col-md">
+        <select class="form-control" name="currency" id="currency">
+          <option>USD $</option>
+          <option>ZWL $</option>
+          <option>EUR €</option>
+          <option>CNY ¥</option>
+          <option>GBP £</option>
+          <option>INR ₹</option>
+          <option>RUB р</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row mb-1">
+      <div class="col"></div>
+      <div class="col">
+        <input
+          type="text"
+          placeholder="Amount"
+          name="amount"
+          id="amount"
+          class="form-control"
+        />
+      </div>
+      <div class="col"></div>
+    </div>
+
+    <div class="form-row">
+      <div class="col"></div>
+      <div class="col">
+        <input
+          class="btn btn-sm btn-block btn-primary btn-outline-warning"
+          type="submit"
+          value="Submit"
+        />
+      </div>
+      <div class="col"></div>
+    </div>
+  </form>
+</div>
+{% endblock main %}

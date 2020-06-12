@@ -1,0 +1,18 @@
+{% extends "loans/base.html" %} {% load static %}
+<!-- ################################################################################ -->
+{% block page_title %}Claims{% endblock page_title %}
+<!-- ################################################################################ -->
+{% block inCol9 %}
+<!-- ################################################################################ -->
+
+{% for claim in claimList %}
+
+<div class="card pl-3 pt-3">
+    <p>
+        <strong>({{claim.tag}}) :</strong> <a href="{% url 'bank:claimed_product' claim.pk %}"><strong>{{claim.productbrand}}
+                {{claim.productModel}}</strong></a> from <a href=""><strong>{{ claim.account.username }}</strong></a> on <span style="font-size: small;" class="mr-auto text-right"><strong>{{claim.claim_date}}</strong></span> expires on <span style="font-size: small;"
+            class="mr-auto text-right"><strong>{{claim.claim_exp_date}}</strong></span>
+        <strong>REF# <a href="{% url 'bank:claimed_product' claim.pk %}"><strong>{{claim.reference}}</strong></a>
+    </p>
+</div>
+<br> {% endfor %} {% endblock inCol9 %}

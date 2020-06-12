@@ -1,0 +1,78 @@
+{% extends "loans/base.html" %} {% load static %}
+<!-- fygusfhbjnmapkojihsav -->
+{% block page_title%}Catalog{% endblock page_title %}
+<!-- isuadvbnmpF';olvbN -->
+{% block inCol9 %}
+<!-- fghsonjvms -->
+<nav class="card-header navbar">
+
+    <form action="{% url 'bank:cat_search' %}" class="form-inline m-1" method="GET">
+        {% comment %} {% csrf_token %} {% endcomment %}
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <input placeholder="Search..." name="q" class="input-group-text" value="{{request.GET.q}}">
+            </div>
+            <input type="submit" class="form-control btn-primary" value="Search">
+        </div>
+    </form>
+    <a href="{% url 'bank:post' %}" class="btn btn-sm btn-primary m-1">post a product</a>
+
+</nav>
+<br> {% if empty %}
+<p style="justify-content: center; font-size: large; font-weight: bold; color: dodgerblue;" class="breadcrumb text-center">
+    Sorry, There Are No Products Of USD ${{empty}} range at the moment!
+</p>
+
+{% endif %}
+<!-- sdbsjkbvsnvlsnkvn;s -->
+{% for product in products %}
+
+<div class="border-info card">
+    <div class="card-footer text-left bg-secondary">
+        <a href="{% url 'bank:product' product.pk %}  " class="btn btn-sm btn-primary">View Product</a>
+        <a href="{% url  'bank:agreement' product.pk %}" class="btn btn-sm btn-primary">Pin Product</a>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+
+            <a style="text-decoration: none;" href="{% url 'bank:product' product.pk %}">
+
+                <strong style="font-size: x-large;">
+          ${{product.price}}
+        </strong>
+                <span style="font-size: x-large; color: silver;">|</span>
+                <strong>{{product.productName}}</strong>
+                <strong>{{product.productbrand|upper}}</strong>
+                <strong>{{product.productModel|upper}}</strong>
+            </a>
+
+        </div>
+        <div class="col-md-6 mt-2">
+            <span style="color: dimgrey;font-size: small;">Location : </span><strong style="color: dodgerblue;">{{product.location}}</strong>
+            <a style="text-decoration: none;" href="">
+
+                <span style="color: dimgrey;font-size: small;">Dealer : </span><strong>{{product.account.username}}</strong>
+            </a>
+        </div>
+
+
+    </div>
+    <hr class="bg-secondary m-2" />
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card-body img-fluid">
+                <img class="img-box rounded-lg" src="{{ product.image1.url }}" alt="audi" height="150" width="150" />
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card-body">
+
+
+                <p>{{ product.description|safe }}</p>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<br /> {% endfor %} {% endblock inCol9 %}

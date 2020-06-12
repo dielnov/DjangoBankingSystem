@@ -1,0 +1,12 @@
+{% extends "sys_admin/base.html" %} {% load crispy_forms_tags %} {% load static %} {% block main %}
+<ol class="breadcrumb mb-4 mt-2">
+    <li class="breadcrumb-item active">Update Client Details</li>
+</ol>
+
+<div class="container">
+    <form method="post">
+        {% csrf_token %} {{form|crispy}}
+        <input class="form-control" type="submit" value="Update">
+    </form>
+</div>
+{% endblock main %}

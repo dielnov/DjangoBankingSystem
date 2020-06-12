@@ -1,0 +1,10 @@
+"C:\Users\dielnov\Desktop\dielnov\env\scripts\activate"
+python mouse_player.pyw
+
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+
+"C:\Users\dielnov\Desktop\dielnov\env\scripts\activate"
+python manage.py runserver
+

@@ -1,0 +1,164 @@
+{% extends "bank/base.html" %} {% load crispy_forms_tags %} {% load static %}
+
+{% block style %}
+<style>
+  .form-control-file {
+    background-color: rgb(162, 162, 252);
+  }
+</style>
+
+{% endblock style %}
+
+<!-- Main Account Block -->
+{% block main %}
+<div style="opacity: 0.85;" class="card p-2">
+  <h3 class="card-header text-center">
+    Confirm Account Credentials
+  </h3>
+  <form class="card-body" enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    <div class="form-row">
+      <div class="col-md-4">
+        <div id="div_id_account" class="form-group">
+          <label for="id_account" class="requiredField">
+            <strong class="Righteous">User Account:</strong>
+          </label>
+          <div class="">
+            <select name="account" class="select form-control" required id="id_account">
+              <option value="">---------</option>
+              <option value="{{ request.user.id }}">{{ request.user }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="div_id_legalEntityName" class="form-group">
+          <label for="id_legalEntityName" class="requiredField">
+            <strong class="Righteous">Legal EntityName:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="legalEntityName" {% if corporate.legalEntityName %}
+              value="{{ corporate.legalEntityName }}" {% endif %} maxlength="60"
+              class="textinput textInput form-control" required id="id_legalEntityName" />
+          </div>
+        </div>
+
+        <div id="div_id_tradingAs" class="form-group">
+          <label for="id_tradingAs" class="requiredField">
+            <strong class="Righteous">Trading As:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="tradingAs" {% if corporate.tradingAs %} value="{{ corporate.tradingAs }}"
+              {% endif %} maxlength="60" class="textinput textInput form-control" required id="id_tradingAs" />
+          </div>
+        </div>
+
+        <div id="div_id_logo" class="form-group">
+          <label for="id_logo" class="requiredField">
+            <strong class="Righteous">Logo:</strong>
+          </label>
+          <div class="">
+            {% if corporate.logo %}
+            <p>
+              <strong>Current:</strong>
+              <a style="color: cornflowerblue;" href="{{ corporate.logo.url }}">
+                {{ corporate.logo.name }}
+              </a>
+            </p>
+            {% endif %}
+            <input type="file" name="logo" {% if corporate.logo %}value="{{ corporate.logo }}"
+              {% else %}required{% endif %} accept="image/*" class="clearablefileinput form-control-file"
+              id="id_logo" />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div id="div_id_registrationNum" class="form-group">
+          <label for="id_registrationNum" class="requiredField">
+            <strong class="Righteous">Registration Number:</strong>
+          </label>
+          <div class="">
+            <input readonly type="text" name="registrationNum" {% if corporate.registrationNum %}
+              value="{{ corporate.registrationNum }}" {% endif %} {% if reg %} value="{{ reg }}" {% endif %}
+              maxlength="60" class="textinput textInput form-control" required id="id_registrationNum" />
+          </div>
+        </div>
+        <div id="div_id_entityType" class="form-group">
+          <label for="id_entityType" class="requiredField">
+            <strong class="Righteous">Legal EntityType:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="entityType" {% if corporate.entityType %} value="{{ corporate.entityType }}"
+              {% endif %} maxlength="60" class="textinput textInput form-control" required id="id_entityType" />
+          </div>
+        </div>
+        <div id="div_id_industrySector" class="form-group">
+          <label for="id_industrySector" class="requiredField">
+            <strong class="Righteous">Industry/Sector:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="industrySector" {% if corporate.industrySector %}
+              value="{{ corporate.industrySector }}" {% endif %} maxlength="60" class="textinput textInput form-control"
+              required id="id_industrySector" />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div id="div_id_countryOfReg" class="form-group">
+          <label for="id_countryOfReg" class="requiredField">
+            <strong class="Righteous">Country Of Registration:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="countryOfReg" {% if corporate.countryOfReg %} value="{{ corporate.countryOfReg }}"
+              {% endif %} maxlength="60" class="textinput textInput form-control" required id="id_countryOfReg" />
+          </div>
+        </div>
+        <div id="div_id_contact1" class="form-group">
+          <label for="id_contact1" class="requiredField">
+            <strong class="Righteous">Contact Person 1:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="contact1" {% if corporate.contact1 %} value="{{ corporate.contact1 }}" {% endif %}
+              maxlength="60" class="textinput textInput form-control" required id="id_contact1" />
+          </div>
+        </div>
+        <div id="div_id_contact2" class="form-group">
+          <label for="id_contact2" class="requiredField">
+            <strong class="Righteous">Contact Person 2:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="contact2" {% if corporate.contact2 %} value="{{ corporate.contact2 }}" {% endif %}
+              maxlength="60" class="textinput textInput form-control" required id="id_contact2" />
+          </div>
+        </div>
+        <div id="div_id_website" class="form-group">
+          <label for="id_website" class="requiredField">
+            <strong class="Righteous">Website:</strong>
+          </label>
+          <div class="">
+            <input type="text" name="website" {% if corporate.website %} value="{{ corporate.website }}" {% endif %}
+              maxlength="60" class="textinput textInput form-control" required id="id_website" />
+          </div>
+        </div>
+        <div class="text-center form-group">
+          <div id="div_id_pOS" class="form-check">
+            <input type="checkbox" name="pOS" {% if corporate.pOS %} checked value="True" {% endif %}
+              class="checkboxinput form-check-input" id="id_pOS" />
+            <label for="id_pOS" class="form-check-label">
+              <strong class="Righteous">POS(status)</strong>
+            </label>
+          </div>
+        </div>
+        <input class="btn btn-block btn-primary btn-outline-warning" type="submit" value="Submit" />
+      </div>
+    </div>
+  </form>
+  <div class="card-footer text-center">
+    <p class="text-center">
+      Please Read And Understand Our
+      <a href="https://www.bancabc.co.zw/terms_of_use">Terms And Conditions</a>
+    </p>
+  </div>
+</div>
+{% endblock main %}

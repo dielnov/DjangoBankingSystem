@@ -1,0 +1,131 @@
+{% extends "bank/base.html" %} {% load static %}
+<!-- fygusfhbjnmapkojihsav -->
+{% block page_title%}Loan Application{% endblock page_title %}
+<!-- isuadvbnmpF';olvbN -->
+{% block main %}
+<div style="height: 100vh; opacity: 0.8;" class="card">
+    <div class="container text-center">
+        <br>
+        <br>
+        <h4>Loan Financing Documents</h4>
+        <h5 class="text-center" style="font-size: small;">PDF documents only!</h5>
+        <br>
+    </div>
+    <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="col-md-3">
+                <div id="" class="form-group">
+                    <label for="" class="requiredField">
+                                <strong class="tagz">Current Payslip/Affidavit Form:</strong>
+                            </label>
+                    <div class="input-group">
+                        <input type="file" name="payslip" accept=".pdf" class="btn btn-primary btn-sm" required id="id_payslip" />
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+                <div id="" class="form-group">
+                    <label for="" class="requiredField">
+                            <strong class="tagz">Proof Of Employment:</strong>
+                        </label>
+                    <div class="input-group">
+                        <input type="file" name="proofOfEmployment" accept=".pdf" class="btn btn-primary btn-sm" required id="id_proofOfEmployment" />
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+
+                <div id="" class="form-group">
+                    <label for="" class="requiredField">
+                                    <strong class="tagz">Proof Of Residence:</strong>
+                                </label>
+                    <div class="input-group">
+
+                        <input type="file" name="proofOfResidence" accept=".pdf" class="btn btn-primary btn-sm" required id="id_proofOfResidence" />
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+
+                <div id="" class="form-group">
+                    <label for="" class="requiredField">
+                                    <strong class="tagz">National ID:</strong>
+                                </label>
+                    <div class="input-group">
+
+                        <input type="file" name="copyOfID" accept=".pdf" class="btn btn-primary btn-sm" required id="id_copyOfID" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center ml-5 mr-5">
+            <input style="border-radius: 5px;" class="btn btn-sm btn-primary btn-outline-warning" value="Submit Documents" type="submit">
+        </div>
+    </form>
+
+    <hr class="bg-light mr-5 ml-5 mb-1">
+
+    <div class="container text-center mt-3">
+        <h4>List Of Your Applied Loans</h4>
+        <br>
+        <div id="loanTitles" class="form-row pl-5">
+            <div class="col-md-4">
+                <p class="">Application Date</p>
+            </div>
+            <div class="col-md-2">
+                <p>Reference#</p>
+            </div>
+            <div class="col-md-2">
+                <p>Loan Processing Status</p>
+            </div>
+            <div class="col-md-2">
+                <p>Loan Status</p>
+            </div>
+            <div class="col-md-2">
+                <p>Links</p>
+            </div>
+
+        </div>
+        <ol>
+            {% for loan in loans %}
+            <li>
+                <div class="card p-0 pt-1 mb-5">
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <p class="">Loan Application On {{ loan.applicationDate }}</p>
+                        </div>
+                        <div class="col-md-2">
+                            <span style="font-size: small;" class="titlesSM">Reference# <br></span>
+                            <p>{{ loan.reference }}</p>
+
+                        </div>
+                        <div class="col-md-2">
+                            <span style="font-size: small;" class="titlesSM">Processing Status: <br></span>
+                            <p>Pending</p>
+                        </div>
+                        <div class="col-md-2">
+                            <span style="font-size: small;" class="titlesSM">Approval Status: <br></span>
+                            <p>Pending</p>
+                        </div>
+                        <div class="col-md-2">
+                            <a class="btn btn-block btn-sm btn-outline-primary" href="{{ loan.applicationForm.url }}">View Application</a>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+
+</div>
+
+{% endblock main %}

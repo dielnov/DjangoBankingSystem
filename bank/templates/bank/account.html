@@ -1,0 +1,71 @@
+{% extends "bank/base.html" %}{% load static %}
+
+<!-- Main Account Block -->
+{% block main %}
+<h3 class="sticky-top card-header Righteous info-color white-text text-right myCardHead py-4 mb-1">
+
+  <strong>PreLoan Balance: {{details.currency}} {{ details.balance }}</strong>
+</h3>
+
+<div class="card c-body">
+  <div class="card-body">
+    {% if no_details %}
+    <h3>You haven't applied for any loan yet.  Make your Loan Prequalification Application{% if user.isCorporate %}
+      <a href="{% url 'bank:corporate' %}">Here.</a>
+      {% else %}
+      <a href="{% url 'bank:individual' %}">Here.</a>
+      {% endif %}</h3>
+    {% else %}
+    <div class="form-row">
+      <div class="col card border-secondary rounded-lg">
+        <div class="card-header text-center">
+          <h3 class="ubuntu"><strong>ACCOUNT DETAILS</strong></h3>
+        </div>
+        {% if messages %}
+        <p style="font-size: large;color: crimson;justify-content: center;">{{messages}}</p>
+
+        {% else %}
+        <p>
+          <strong class="Righteous">Legal Entity Name:</strong>
+          <br />
+
+          {% if not request.user.isCorporate %}
+          <span class="fomi">{{ individual.title }} {{ individual.firstName }} {{ individual.middleName }}
+            {{ individual.lastName }}</span>
+          {% else %}
+          <span class="fomi">{{ corporate.legalEntityName }}</span>
+          {% endif %}
+        </p>
+        <p>
+          <strong class="Righteous">Account Number:</strong>
+          <br />
+          <span class="fomi">{{ details.accnum }}</span>
+        </p>
+        <p>
+          <strong class="Righteous">Account Branch:</strong>
+          <br />
+          <span class="fomi">{{ details.branch }}</span>
+        </p>
+        <p>
+          <strong class="Righteous">Loan Type:</strong>
+          <br />
+          <span class="fomi">{{ details.acctype }}</span>
+        </p>
+        {% endif %}
+
+      </div>
+      <div id="two" class="col"></div>
+      <div id="three" class="col"></div>
+      <div id="four" class="col"></div>
+    </div>
+    {% endif %}
+
+  </div>
+  <div class="card-footer text-right">
+    <span class="Lateef">
+      <span>Last Login:</span>
+      {{ request.user.last_login }}
+    </span>
+  </div>
+</div>
+{% endblock main %}

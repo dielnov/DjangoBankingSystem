@@ -1,0 +1,13 @@
+{% extends "sys_admin/base.html" %} {% load static %} {% block main %}
+<ol class="breadcrumb mb-4 mt-2">
+    <li class="breadcrumb-item active">Registered Clients</li>
+</ol>
+
+<ol>
+    {% for user in listOfUsers %}
+
+    <li><a href="{% url 'bank:user_update' user.pk %}">{{ user }}</a></li>
+
+    {% endfor %}
+</ol>
+{% endblock main %}

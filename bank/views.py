@@ -18,7 +18,10 @@ def index(request):
     if not request.user.is_authenticated:
         return render(request, 'bank/index.html')
     else:
-        return account_view(request)
+        if request.user.is_superuser:
+            return redirect('bank:dashboard')
+        else:
+            return account_view(request)
 
 
 @login_required

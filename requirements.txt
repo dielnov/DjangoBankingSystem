@@ -21,7 +21,7 @@ pipenv==2018.11.26
 pycodestyle==2.5.0
 pylint==2.5.3
 pynput==1.6.8
-PyPDF2==1.26.0
+PyPDF2==1.27.5
 pyttsx3==2.87
 pytz==2020.1
 six==1.14.0
